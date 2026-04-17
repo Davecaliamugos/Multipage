@@ -68,43 +68,25 @@ def render_navigation(active_page: str = "home"):
     /* Mobile responsive - maintain same design */
     @media (max-width: 768px) {
         [data-testid="stVerticalBlock"] > div > [data-testid="stHorizontalBlock"] {
-            flex-wrap: wrap !important;
-            gap: 0.3rem !important;
-            padding: 0.5rem 0 !important;
-        }
-        
-        [data-testid="stHorizontalBlock"] > div {
-            min-width: 0 !important;
-            flex: 1 1 auto !important;
-        }
-        
-        .stPageLink a {
-            font-size: 0.7rem !important;
-            padding: 0.3rem 0.5rem !important;
-            white-space: normal !important;
-        }
-        
-        [data-testid="stMarkdownContainer"] span {
-            font-size: 1rem !important;
-        }
-    }
-    
-    /* Tablet breakpoint */
-    @media (max-width: 1024px) {
-        .block-container {
-            max-width: 95% !important;
-        }
-    }
-    
-    /* Extra small phones */
-    @media (max-width: 480px) {
-        [data-testid="stVerticalBlock"] > div > [data-testid="stHorizontalBlock"] {
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
             padding: 0.4rem 0 !important;
         }
         
+        [data-testid="stHorizontalBlock"] > div {
+            min-width: auto !important;
+            flex: 0 0 auto !important;
+        }
+        
         .stPageLink a {
-            font-size: 0.65rem !important;
-            padding: 0.2rem 0.4rem !important;
+            font-size: 0.75rem !important;
+            padding: 0.25rem 0.5rem !important;
+            white-space: nowrap !important;
+        }
+        
+        [data-testid="stMarkdownContainer"] span {
+            font-size: 1.1rem !important;
         }
     }
     </style>

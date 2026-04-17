@@ -337,118 +337,12 @@ input[type="text"]::placeholder {
 }
 
 /* Responsive tweaks */
-@media (max-width: 1024px) {
-    .block-container {
-        max-width: 90% !important;
-    }
-    
-    .hero-text h1 {
-        font-size: 2.4rem;
-    }
-    
-    .stat-card {
-        padding: 0.9rem 1rem !important;
-    }
-}
-
 @media (max-width: 768px) {
-    .block-container {
-        max-width: 95% !important;
-        padding-top: 1.8rem !important;
-    }
-    
     .hero-image-card {
-        width: 200px;
         margin: 0 auto 1.5rem auto;
     }
-    
     .hero-text h1 {
-        font-size: 1.8rem;
-        line-height: 1.1;
-    }
-    
-    .hero-eyebrow {
-        font-size: 0.7rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 0.85rem;
-        max-width: 100%;
-    }
-    
-    .hero-tag {
-        font-size: 0.7rem;
-        padding: 0.12rem 0.6rem;
-    }
-    
-    a[data-testid="stLinkButton"] {
-        font-size: 0.75rem;
-        padding: 0.35rem 1rem;
-    }
-    
-    .stat-card {
-        padding: 0.8rem 0.9rem !important;
-    }
-    
-    .stat-label {
-        font-size: 0.65rem;
-    }
-    
-    .stat-value {
-        font-size: 1.3rem;
-    }
-    
-    .section-title {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .block-container {
-        max-width: 100% !important;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-        padding-top: 1.5rem !important;
-    }
-    
-    .hero-image-card {
-        width: 160px;
-        margin: 0 auto 1.2rem auto;
-    }
-    
-    .hero-text h1 {
-        font-size: 1.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 0.8rem;
-    }
-    
-    .hero-tag {
-        font-size: 0.65rem;
-        padding: 0.1rem 0.5rem;
-    }
-    
-    a[data-testid="stLinkButton"] {
-        font-size: 0.7rem;
-        padding: 0.3rem 0.9rem;
-    }
-    
-    .stat-card {
-        padding: 0.7rem 0.8rem !important;
-    }
-    
-    .stat-label {
-        font-size: 0.6rem;
-    }
-    
-    .stat-value {
-        font-size: 1.1rem;
-    }
-    
-    input[type="text"] {
-        font-size: 0.85rem;
-        padding: 0.4rem 0.75rem;
+        font-size: 2.2rem;
     }
 }
 </style>
@@ -524,22 +418,6 @@ for i, (label, value) in enumerate(metrics):
             """,
             unsafe_allow_html=True
         )
-
-# Add CSS to make stats responsive
-st.markdown("""
-<style>
-@media (max-width: 1024px) {
-    /* On tablet, show 2 columns for stats */
-    [data-testid="stColumn"]:nth-child(n+3) {
-        margin-top: -30px;
-    }
-}
-
-@media (max-width: 768px) {
-    /* On mobile, show 2 columns by adjusting layout */
-}
-</style>
-""", unsafe_allow_html=True)
 
 
 
