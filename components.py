@@ -12,6 +12,9 @@ def apply_global_effects():
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
     /* ========== GLOBAL RESETS ========== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    /* ========== GLOBAL RESETS ========== */
     .stApp {
         background: radial-gradient(ellipse at 10% 0%, #0a0f1a 0%, #020617 50%, #000 100%) !important;
         min-height: 100vh;
@@ -55,28 +58,10 @@ def apply_global_effects():
 
     /* Ensure sidebar toggle button is visible */
     header[data-testid="stHeader"] button[data-testid="baseButton-header"],
-    button[kind="header"],
-    button[kind="headerNoPadding"] {
+    button[kind="header"] {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-        position: fixed !important;
-        top: 0.5rem !important;
-        left: 0.5rem !important;
-        z-index: 999999 !important;
-    }
-
-    /* Mobile sidebar overlay */
-    @media (max-width: 768px) {
-        /* Ensure sidebar overlay works properly */
-        .stApp[data-testid="stApp"] {
-            position: relative;
-        }
-
-        /* Sidebar expanded state */
-        section[data-testid="stSidebar"][data-testid="stSidebar"][aria-expanded="true"] {
-            box-shadow: 0 0 50px rgba(0,0,0,0.8) !important;
-        }
     }
 
     .main {
@@ -111,36 +96,23 @@ def apply_global_effects():
     }
 
     [data-testid="stSidebarNav"] a[aria-current="page"] {
+    }
+
+    [data-testid="stSidebarNav"] a[aria-current="page"] {
         background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(255, 107, 203, 0.1)) !important;
+        color: #00d4ff !important;
         color: #00d4ff !important;
         border: 1px solid rgba(0, 212, 255, 0.3) !important;
         font-weight: 600 !important;
+        font-weight: 600 !important;
     }
 
-    /* ========== RESPONSIVE SIDEBAR ========== */
-    /* Mobile sidebar improvements */
+    /* ========== RESPONSIVE DESIGN ========== */
     @media (max-width: 768px) {
         .block-container {
             padding-left: 1.5rem !important;
             padding-right: 1.5rem !important;
             padding-top: 1rem !important;
-        }
-
-        /* Ensure sidebar is accessible on mobile */
-        section[data-testid="stSidebar"] {
-            min-width: 280px !important;
-            max-width: 85vw !important;
-        }
-
-        /* Sidebar navigation items - better touch targets */
-        [data-testid="stSidebarNav"] a {
-            padding: 0.75rem 1rem !important;
-            font-size: 0.95rem !important;
-        }
-
-        /* Sidebar toggle button visibility */
-        button[kind="headerNoPadding"] {
-            z-index: 999999 !important;
         }
     }
 
@@ -149,23 +121,6 @@ def apply_global_effects():
             padding-left: 1rem !important;
             padding-right: 1rem !important;
         }
-
-        /* Smaller screens - compact sidebar */
-        section[data-testid="stSidebar"] {
-            min-width: 260px !important;
-            max-width: 90vw !important;
-        }
-
-        [data-testid="stSidebarNav"] a {
-            padding: 0.6rem 0.8rem !important;
-            font-size: 0.9rem !important;
-        }
-    }
-
-    /* Ensure sidebar content is readable */
-    [data-testid="stSidebar"] .block-container {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
     }
     </style>
 
