@@ -43,6 +43,14 @@ st.markdown("""
 footer {visibility: hidden;}
 .stDeployButton {display:none;}
 
+/* Sidebar text colors */
+.stApp, .stApp * { color: #e5e7eb; }
+[data-testid="stSidebar"] .block-container { color: #e5e7eb !important; }
+[data-testid="stSidebar"] p, [data-testid="stSidebar"] span,
+[data-testid="stSidebar"] a, [data-testid="stSidebar"] div { color: #e5e7eb !important; }
+[data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 { color: #e5e7eb !important; }
+
 /* Button overrides */
 .stButton > button {
     background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(255,107,203,0.12)) !important;
@@ -167,10 +175,11 @@ components.html("""
     margin-bottom: 1rem;
   }
   .hero-title {
-    font-size: 2.8rem; font-weight: 900;
+    font-size: clamp(1.8rem, 6vw, 2.8rem); font-weight: 900;
     color: #e5e7eb; margin: 0 0 0.7rem;
     line-height: 1.1;
     display: flex; align-items: center; gap: 12px;
+    flex-wrap: wrap;
   }
   .hero-icon-wrap {
     width: 52px; height: 52px;
@@ -181,9 +190,19 @@ components.html("""
     flex-shrink: 0;
   }
   .hero-sub {
-    font-size: 1rem; color: #9ca3af;
+    font-size: clamp(0.85rem, 2.5vw, 1rem); color: #9ca3af;
     line-height: 1.7; margin: 0;
     max-width: 560px;
+  }
+  /* Mobile responsive */
+  @media (max-width: 640px) {
+    .hero-wrap { padding: 1.6rem 1.2rem 1.4rem; border-radius: 18px; }
+    .hero-icon-wrap { width: 44px; height: 44px; }
+    .hero-icon-wrap svg { width: 24px; height: 24px; }
+    .hero-stats { gap: 1.2rem; margin-top: 1.2rem; }
+    .hero-stat-icon { width: 28px; height: 28px; }
+    .hero-stat-text { font-size: 0.75rem; }
+    .hero-stat-val { font-size: 0.85rem; }
   }
   .hero-stats {
     display: flex; gap: 2rem; margin-top: 1.6rem;
@@ -424,6 +443,16 @@ if st.session_state.selected_game is None:
                     display: inline-flex; align-items: center; gap: 5px;
                     font-size: 0.72rem; color: #6b7280;
                   }}
+                  /* Mobile responsive */
+                  @media (max-width: 640px) {{
+                    .gc {{ padding: 1.2rem 0.9rem 1rem; min-height: 180px; border-radius: 16px; }}
+                    .gc-icon {{ width: 52px; height: 52px; border-radius: 14px; }}
+                    .gc-icon svg {{ width: 28px; height: 28px; }}
+                    .gc-title {{ font-size: 1rem; }}
+                    .gc-desc {{ font-size: 0.75rem; line-height: 1.45; }}
+                    .gc-badge {{ font-size: 0.62rem; padding: 0.18rem 0.55rem; }}
+                    .gc-ctrl {{ font-size: 0.68rem; }}
+                  }}
                 </style>
                 <div class="gc">
                   <div class="gc-glow"></div>
@@ -556,6 +585,26 @@ if st.session_state.selected_game == "snake":
       .dpad{grid-template-rows:52px 52px 52px;}
       .db-down{grid-column:2;grid-row:3;}
       .swipe-hint{font-size:0.68rem;color:#4b5563;margin-top:8px;}
+      /* Mobile responsive */
+      @media (max-width: 640px) {{
+        .gw {{ padding: 0; }}
+        .scoreboard {{ grid-template-columns: repeat(2, 1fr); gap: 6px; }}
+        .sc {{ padding: 8px 4px; }}
+        .sv {{ font-size: 1.3rem; }}
+        .sl {{ font-size: 0.58rem; }}
+        .cwrap {{ border-radius: 12px; border-width: 1px; }}
+        .ov {{ padding: 1rem; }}
+        .ov-icon {{ width: 56px; height: 56px; border-radius: 16px; }}
+        .ov-icon svg {{ width: 28px; height: 28px; }}
+        .ov-title {{ font-size: 1.4rem; }}
+        .ov-sub {{ font-size: 0.8rem; }}
+        .pbtn {{ padding: 0.65rem 1.5rem; font-size: 0.9rem; }}
+        .dpad {{ grid-template-columns: 48px 48px 48px; grid-template-rows: 48px 48px 48px; gap: 5px; }}
+        .db {{ width: 48px; height: 48px; border-radius: 12px; }}
+        .db svg {{ width: 18px; height: 18px; }}
+        .speed-row {{ gap: 6px; }}
+        .sbtn {{ padding: 0.35rem 0.8rem; font-size: 0.72rem; }}
+      }}
     </style>
     </head><body>
     <div class="gw">
@@ -824,6 +873,28 @@ if st.session_state.selected_game == "tetris":
       .db:active,.db.pressed{transform:scale(0.93);background:rgba(167,139,250,0.15);border-color:#a78bfa;}
       .db-rotate{background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.35);color:#a78bfa;}
       .db-hard{background:rgba(0,212,255,0.08);border-color:rgba(0,212,255,0.35);color:#00d4ff;font-size:0.7rem;font-weight:700;}
+      /* Mobile responsive */
+      @media (max-width: 640px) {{
+        .gw {{ padding: 0; }}
+        .layout {{ flex-direction: column; align-items: center; gap: 10px; }}
+        .left-panel {{ display: flex; flex-direction: row; gap: 8px; width: 100%; justify-content: center; }}
+        .scoreboard {{ flex-direction: row; width: auto; gap: 6px; }}
+        .sc {{ padding: 8px 10px; }}
+        .sv {{ font-size: 1.2rem; }}
+        .sl {{ font-size: 0.55rem; }}
+        .next-cv {{ width: 60px; height: 60px; }}
+        .next-label {{ font-size: 0.55rem; margin-bottom: 4px; }}
+        .cwrap {{ border-radius: 10px; border-width: 1px; }}
+        .ov {{ padding: 1rem; }}
+        .ov-icon {{ width: 52px; height: 52px; border-radius: 14px; }}
+        .ov-icon svg {{ width: 26px; height: 26px; }}
+        .ov-title {{ font-size: 1.3rem; }}
+        .ov-sub {{ font-size: 0.78rem; }}
+        .pbtn {{ padding: 0.6rem 1.4rem; font-size: 0.9rem; }}
+        .tdpad {{ grid-template-columns: 44px 44px 44px 44px; grid-template-rows: 44px 44px; gap: 5px; }}
+        .db {{ width: 44px; height: 44px; border-radius: 12px; }}
+        .db svg {{ width: 18px; height: 18px; }}
+      }}
     </style>
     </head><body>
     <div class="gw">
