@@ -1,7 +1,7 @@
 # 🎨 Dave Campo | Developer Portfolio
 
 [![Live Preview](https://img.shields.io/badge/Live%20Preview-View%20Site-00d4ff?style=for-the-badge&logo=streamlit&logoColor=white)]
-(https://d4veeeeeee.streamlit.app/)
+https://d4veeeeeee.streamlit.app/
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io)
 [![License](https://img.shields.io/badge/License-MIT-ff6bcb?style=for-the-badge)](LICENSE)
