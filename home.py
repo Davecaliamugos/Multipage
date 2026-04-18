@@ -329,7 +329,7 @@ with st.container():
           <p class="eyebrow">
             <i class="fa-solid fa-code"></i>Full-Stack Developer
             <span class="eyebrow-sep">&#9670;</span>
-            <i class="fa-brands fa-python"></i>Django Specialist
+            <i class="fa-brands fa-python"></i>Django Beginner
             <span class="eyebrow-sep">&#9670;</span>
             <i class="fa-solid fa-graduation-cap"></i>3rd Year Student
           </p>
@@ -426,19 +426,65 @@ with st.container():
         """, height=380)
 
 # ═══════════════════════════════════════════════════════
-#                      FOOTER
+#   FOOTER
 # ═══════════════════════════════════════════════════════
 st.markdown("---")
 
 components.html("""
-<div style="
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  body {
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    display:flex;justify-content:space-between;align-items:center;
-    flex-wrap:wrap;gap:0.5rem;padding:0.4rem 0;
-">
-  <div style="color:#6b7280;font-size:0.82rem;">
-    © 2025 <strong style="color:#9ca3af;">Dave Campo</strong>
-    · Built with Python &amp; Streamlit
+    background:transparent;
+  }
+  @keyframes fadeIn {
+    from { opacity:0; } to { opacity:1; }
+  }
+  .footer {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:0.5rem;
+    padding:0.4rem 0;
+    animation: fadeIn 0.6s ease both;
+  }
+  .footer-left {
+    color:#6b7280; font-size:0.82rem;
+    display:flex; align-items:center; gap:0.4rem;
+  }
+  .footer-left strong { color:#9ca3af; }
+  .footer-right {
+    display:flex; align-items:center; gap:0.4rem;
+    color:#6b7280; font-size:0.8rem;
+  }
+</style>
+</head>
+<body>
+<div class="footer">
+  <div class="footer-left">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+         viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+    © 2026 <strong>Dave Campo</strong> · Built with Python &amp; Streamlit
   </div>
+  <div class="footer-right">
+    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+         viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+      <polyline points="9 22 9 12 15 12 15 22"/>
+    </svg>
+    Home Page
 </div>
-""", height=50)
+</div>
+</body>
+</html>
+""", height=46)

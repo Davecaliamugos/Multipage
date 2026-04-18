@@ -2022,19 +2022,68 @@ if st.session_state.selected_game == "quiz":
                 """, height=175)
 
 # ═══════════════════════════════════════════════════════
-#                      FOOTER
+#   FOOTER
 # ═══════════════════════════════════════════════════════
 st.markdown("---")
 
 components.html("""
-<div style="
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  body {
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    display:flex;justify-content:space-between;align-items:center;
-    flex-wrap:wrap;gap:0.5rem;padding:0.4rem 0;
-">
-  <div style="color:#6b7280;font-size:0.82rem;">
-    © 2025 <strong style="color:#9ca3af;">Dave Campo</strong>
-    · Built with Python &amp; Streamlit
+    background:transparent;
+  }
+  @keyframes fadeIn {
+    from { opacity:0; } to { opacity:1; }
+  }
+  .footer {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:0.5rem;
+    padding:0.4rem 0;
+    animation: fadeIn 0.6s ease both;
+  }
+  .footer-left {
+    color:#6b7280; font-size:0.82rem;
+    display:flex; align-items:center; gap:0.4rem;
+  }
+  .footer-left strong { color:#9ca3af; }
+  .footer-right {
+    display:flex; align-items:center; gap:0.4rem;
+    color:#6b7280; font-size:0.8rem;
+  }
+</style>
+</head>
+<body>
+<div class="footer">
+  <div class="footer-left">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+         viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+    © 2026 <strong>Dave Campo</strong> · Built with Python &amp; Streamlit
   </div>
+ <div class="footer-right">
+    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+         viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <line x1="6" y1="12" x2="10" y2="12"></line>
+      <line x1="8" y1="10" x2="8" y2="14"></line>
+      <line x1="15" y1="13" x2="15.01" y2="13"></line>
+      <line x1="18" y1="11" x2="18.01" y2="11"></line>
+      <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+    </svg>
+    Game Page
 </div>
-""", height=50)
+</div>
+</body>
+</html>
+""", height=46)
