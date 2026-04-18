@@ -6,9 +6,6 @@
 [![License](https://img.shields.io/badge/License-MIT-ff6bcb?style=for-the-badge)](LICENSE)
 
 > 🚀 A stunning, fully responsive multi-page portfolio built with **Streamlit** featuring dark-themed UI, interactive games, smooth animations, and dynamic content.
-
-![Portfolio Preview](assets/profile/profile.png)
-
 ---
 
 ## 📑 Table of Contents
