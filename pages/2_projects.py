@@ -940,7 +940,7 @@ function renderGrid(filter) {{
     const imgSrc = p.b64 || p.image;
     const imgHTML = imgSrc
       ? `<img src="${{imgSrc}}" alt="${{p.title}}" loading="lazy"
-            onerror="this.parentElement.innerHTML='<div class=\\'card-placeholder\\' style=\\'${{placeholderStyle(p)}}\\'><i class=\\"${{p.icon}}\\" style=\\"color:${{p.color}};\\"></i></div>'">`
+            onerror="this.parentElement.innerHTML='<div class=\\'card-placeholder\\' style=\\'${{placeholderStyle(p)}}\\'><i class=\\"${{p.icon}}\\" style=\\"color:${{p.color}};\\"></i></div>`
       : `<div class="card-placeholder" style="${{placeholderStyle(p)}}">
            <i class="${{p.icon}}" style="color:${{p.color}};"></i>
          </div>`;
