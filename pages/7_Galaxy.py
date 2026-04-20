@@ -14,6 +14,18 @@ st.set_page_config(
 
 apply_global_effects()
 
+st.markdown("""
+<style>
+/* Sidebar text colors - from games.py */
+.stApp, .stApp * { color: #e5e7eb; }
+[data-testid="stSidebar"] .block-container { color: #e5e7eb !important; }
+[data-testid="stSidebar"] p, [data-testid="stSidebar"] span,
+[data-testid="stSidebar"] a, [data-testid="stSidebar"] div { color: #e5e7eb !important; }
+[data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 { color: #e5e7eb !important; }
+</style>
+""", unsafe_allow_html=True)
+
 with st.sidebar:
     st.markdown("""
     <div style="text-align:center;margin-bottom:1rem;">
