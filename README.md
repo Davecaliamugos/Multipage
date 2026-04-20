@@ -64,6 +64,7 @@
 - ✅ **Responsive Design** - Mobile-first, works on all devices
 - ✅ **Dark Theme** - Consistent dark UI across all pages
 - ✅ **Interactive Games** - 6 built-in browser games
+- ✅ **Galaxy Explorer** - 3D journey from Earth to the edge of the universe
 - ✅ **Project Showcase** - Filterable project grid with modals
 - ✅ **Skills Visualization** - Animated skill bars and categories
 - ✅ **Certificate Gallery** - Image viewer with download options
@@ -79,6 +80,7 @@
 - 🐦 **Flappy Bird** - Side-scrolling game
 - 🔨 **Whack-a-Mole** - Reaction time game
 - 💻 **Dev Quiz** - Programming knowledge quiz
+- 🚀 **Galaxy Explorer** - 3D cosmic journey with 14 destinations
 
 ---
 
@@ -118,7 +120,8 @@ Activity2/
 │   ├── 3_skills.py             # Skills & expertise
 │   ├── 4_certificates.py       # Certifications gallery
 │   ├── 5_contact.py            # Contact page
-│   └── 6_games.py              # Interactive games hub
+│   ├── 6_games.py              # Interactive games hub
+│   └── 7_galaxy.py             # Galaxy Explorer 3D journey
 │
 ├── 📁 assets/                   # Static assets
 │   ├── 📁 cert/                # Certificate images
@@ -244,6 +247,16 @@ Activity2/
 - Programming quiz
 - Mobile-optimized controls
 
+### 🚀 Galaxy Explorer (`7_galaxy.py`)
+- **3D Interactive Journey** - Travel from Earth to the edge of the observable universe
+- **14 Cosmic Destinations**: Earth → Moon → Mars → Jupiter → Saturn → Uranus → Neptune → Oort Cloud → Proxima Centauri → Galactic Center → Andromeda Galaxy → TON 618 (Black Hole) → Cosmic Web → Edge of Universe
+- **Three.js Powered** - Real-time 3D planet rendering with custom textures
+- **Immersive HUD** - Sci-fi interface with distance counter, progress bar, and stats
+- **Gyroscope Support** - Device tilt controls for mobile (iOS/Android)
+- **Warp Transitions** - Animated travel between destinations
+- **Fullscreen Mode** - Toggle for immersive experience
+- **Swipe/Keyboard Navigation** - Next/Previous controls
+
 ---
 
 ## 🎮 Games Collection
@@ -257,6 +270,7 @@ Activity2/
 | **Flappy Bird** | Arcade | Space / Tap | ✅ |
 | **Whack-a-Mole** | Reflex | Click / Tap | ✅ |
 | **Dev Quiz** | Quiz | Multiple choice | ✅ |
+| **Galaxy Explorer** | Educational | Swipe/Arrows/Gyro | ✅ |
 
 ---
 
