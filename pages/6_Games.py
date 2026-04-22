@@ -38,12 +38,10 @@ st.markdown("""
     background: radial-gradient(ellipse at 0% 0%, #1a2744 0, #020617 45%, #000 100%) !important;
 }
 
-/* Hide Streamlit default elements */
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 .stDeployButton {display:none;}
 
-/* Sidebar text colors */
 .stApp, .stApp * { color: #e5e7eb; }
 [data-testid="stSidebar"] .block-container { color: #e5e7eb !important; }
 [data-testid="stSidebar"] p, [data-testid="stSidebar"] span,
@@ -51,7 +49,6 @@ footer {visibility: hidden;}
 [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2,
 [data-testid="stSidebar"] h3 { color: #e5e7eb !important; }
 
-/* Button overrides */
 .stButton > button {
     background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(255,107,203,0.12)) !important;
     border: 1px solid rgba(0,212,255,0.4) !important;
@@ -78,7 +75,6 @@ footer {visibility: hidden;}
     box-shadow: 0 10px 28px rgba(0,212,255,0.35) !important;
 }
 
-/* Radio buttons */
 .stRadio > div {
     background: rgba(15,23,42,0.6) !important;
     border-radius: 12px !important;
@@ -89,12 +85,8 @@ footer {visibility: hidden;}
     font-family: 'Inter', sans-serif !important;
 }
 
-/* Divider */
-hr {
-    border-color: rgba(148,163,184,0.15) !important;
-}
+hr { border-color: rgba(148,163,184,0.15) !important; }
 
-/* Game grid cards */
 .game-grid-card {
     background: rgba(15,23,42,0.96);
     border: 1px solid rgba(148,163,184,0.2);
@@ -106,20 +98,11 @@ hr {
     position: relative;
     overflow: hidden;
 }
-.game-grid-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent, #00d4ff), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-.game-grid-card:hover::before { opacity: 1; }
-.game-grid-card:hover {
-    border-color: var(--accent, #00d4ff);
-    box-shadow: 0 0 40px rgba(0,212,255,0.1), 0 20px 60px rgba(0,0,0,0.6);
-    transform: translateY(-6px);
+
+/* Responsive fixes */
+@media (max-width: 768px) {
+    .stApp { padding: 0 !important; }
+    .block-container { padding: 0.5rem !important; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -175,7 +158,7 @@ components.html("""
     margin-bottom: 1rem;
   }
   .hero-title {
-    font-size: clamp(1.8rem, 6vw, 2.8rem); font-weight: 900;
+    font-size: clamp(1.6rem, 5vw, 2.8rem); font-weight: 900;
     color: #e5e7eb; margin: 0 0 0.7rem;
     line-height: 1.1;
     display: flex; align-items: center; gap: 12px;
@@ -190,36 +173,15 @@ components.html("""
     flex-shrink: 0;
   }
   .hero-sub {
-    font-size: clamp(0.85rem, 2.5vw, 1rem); color: #9ca3af;
+    font-size: clamp(0.8rem, 2.5vw, 1rem); color: #9ca3af;
     line-height: 1.7; margin: 0;
     max-width: 560px;
   }
-  /* Mobile responsive */
   @media (max-width: 640px) {
-    .hero-wrap { padding: 1.6rem 1.2rem 1.4rem; border-radius: 18px; }
-    .hero-icon-wrap { width: 44px; height: 44px; }
-    .hero-icon-wrap svg { width: 24px; height: 24px; }
-    .hero-stats { gap: 1.2rem; margin-top: 1.2rem; }
-    .hero-stat-icon { width: 28px; height: 28px; }
-    .hero-stat-text { font-size: 0.75rem; }
-    .hero-stat-val { font-size: 0.85rem; }
+    .hero-wrap { padding: 1.4rem 1rem 1.2rem; border-radius: 16px; }
+    .hero-icon-wrap { width: 40px; height: 40px; }
+    .hero-icon-wrap svg { width: 20px; height: 20px; }
   }
-  .hero-stats {
-    display: flex; gap: 2rem; margin-top: 1.6rem;
-    flex-wrap: wrap;
-  }
-  .hero-stat {
-    display: flex; align-items: center; gap: 8px;
-  }
-  .hero-stat-icon {
-    width: 32px; height: 32px;
-    background: rgba(0,212,255,0.08);
-    border: 1px solid rgba(0,212,255,0.15);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-stat-text { font-size: 0.82rem; color: #9ca3af; }
-  .hero-stat-val { font-size: 0.92rem; font-weight: 700; color: #e5e7eb; }
 </style>
 <div class="hero-wrap">
   <div class="hero-tag">
@@ -239,11 +201,10 @@ components.html("""
     Mini Games
   </h1>
   <p class="hero-sub">
-    Take a break and play! Seven hand-crafted mini-games await — all with full keyboard &amp; mobile touch controls.
+    Take a break and play! Seven hand-crafted mini-games await — all with full keyboard &amp; mobile touch controls, and realistic sound effects!
   </p>
-  
 </div>
-""", height=290)
+""", height=260)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -374,14 +335,12 @@ if st.session_state.selected_game is None:
       </svg>
       <div>
         <h2>Choose Your Game</h2>
-        <p>Click any card to launch — all games support keyboard &amp; touch</p>
+        <p>Click any card to launch — all games support keyboard, touch &amp; sound effects</p>
       </div>
     </div>
     """, height=65)
 
-    # Build game cards in rows of 3 + 1 last row
     rows = [GAMES[:3], GAMES[3:6], GAMES[6:]]
-    
     for row in rows:
         if not row:
             continue
@@ -443,15 +402,13 @@ if st.session_state.selected_game is None:
                     display: inline-flex; align-items: center; gap: 5px;
                     font-size: 0.72rem; color: #6b7280;
                   }}
-                  /* Mobile responsive */
                   @media (max-width: 640px) {{
-                    .gc {{ padding: 1.2rem 0.9rem 1rem; min-height: 180px; border-radius: 16px; }}
-                    .gc-icon {{ width: 52px; height: 52px; border-radius: 14px; }}
-                    .gc-icon svg {{ width: 28px; height: 28px; }}
-                    .gc-title {{ font-size: 1rem; }}
-                    .gc-desc {{ font-size: 0.75rem; line-height: 1.45; }}
-                    .gc-badge {{ font-size: 0.62rem; padding: 0.18rem 0.55rem; }}
-                    .gc-ctrl {{ font-size: 0.68rem; }}
+                    .gc {{ padding: 1rem 0.8rem; min-height: 160px; border-radius: 14px; }}
+                    .gc-icon {{ width: 48px; height: 48px; border-radius: 12px; }}
+                    .gc-icon svg {{ width: 24px; height: 24px; }}
+                    .gc-title {{ font-size: 0.95rem; }}
+                    .gc-desc {{ font-size: 0.72rem; }}
+                    .gc-badge {{ font-size: 0.6rem; }}
                   }}
                 </style>
                 <div class="gc">
@@ -471,7 +428,7 @@ if st.session_state.selected_game is None:
                   </div>
                 </div>
                 """, height=240)
-                
+
                 if st.button(f"▶  Play {game['title']}", key=f"play_{game['id']}", use_container_width=True):
                     st.session_state.selected_game = game['id']
                     st.session_state.quiz_initialized = False
@@ -492,48 +449,170 @@ if st.session_state.selected_game:
     st.markdown("---")
 
 # ═══════════════════════════════════════════════════════
+#   SHARED AUDIO ENGINE (Web Audio API - No external files)
+# ═══════════════════════════════════════════════════════
+AUDIO_ENGINE_JS = """
+<script>
+// ══════════════════════════════════════════════
+//   GLOBAL AUDIO ENGINE  (Web Audio API)
+//   Works offline — no external sound files
+// ══════════════════════════════════════════════
+window._AC = null;
+function getAC() {
+  if (!window._AC) {
+    window._AC = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  // Resume if suspended (browser autoplay policy)
+  if (window._AC.state === 'suspended') window._AC.resume();
+  return window._AC;
+}
+
+// Master volume (0-1)
+window._masterVol = 0.35;
+
+function _play(fn) {
+  try { const ac = getAC(); fn(ac); } catch(e) {}
+}
+
+/* ── beep(freq, dur, type, vol, delay) ── */
+function beep(freq=440, dur=0.08, type='square', vol=0.18, delay=0) {
+  _play(ac => {
+    const o = ac.createOscillator();
+    const g = ac.createGain();
+    o.connect(g); g.connect(ac.destination);
+    o.type = type; o.frequency.value = freq;
+    const t = ac.currentTime + delay;
+    g.gain.setValueAtTime(vol * window._masterVol, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    o.start(t); o.stop(t + dur + 0.01);
+  });
+}
+
+/* ── noise burst (for whack/crash) ── */
+function noiseBurst(dur=0.12, vol=0.3, freq=200) {
+  _play(ac => {
+    const buf = ac.createBuffer(1, ac.sampleRate * dur, ac.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1);
+    const src = ac.createBufferSource();
+    src.buffer = buf;
+    const filt = ac.createBiquadFilter();
+    filt.type = 'bandpass'; filt.frequency.value = freq; filt.Q.value = 1.5;
+    const g = ac.createGain();
+    src.connect(filt); filt.connect(g); g.connect(ac.destination);
+    g.gain.setValueAtTime(vol * window._masterVol, ac.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + dur);
+    src.start(); src.stop(ac.currentTime + dur + 0.01);
+  });
+}
+
+/* ── sweep(f0, f1, dur, type, vol) ── */
+function sweep(f0=200, f1=800, dur=0.15, type='sine', vol=0.2) {
+  _play(ac => {
+    const o = ac.createOscillator();
+    const g = ac.createGain();
+    o.connect(g); g.connect(ac.destination);
+    o.type = type;
+    o.frequency.setValueAtTime(f0, ac.currentTime);
+    o.frequency.exponentialRampToValueAtTime(f1, ac.currentTime + dur);
+    g.gain.setValueAtTime(vol * window._masterVol, ac.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + dur);
+    o.start(); o.stop(ac.currentTime + dur + 0.01);
+  });
+}
+
+/* ══════════════════════════════════════
+   NAMED SOUND FUNCTIONS PER GAME
+══════════════════════════════════════ */
+
+// ── SNAKE ──
+function sndSnakeEat()   { beep(660,0.07,'sine',0.25); setTimeout(()=>beep(880,0.07,'sine',0.2),60); }
+function sndSnakeStar()  { [0,60,120,180].forEach(d=>beep(660+d*3,0.06,'sine',0.22,d/1000)); }
+function sndSnakeDie()   { sweep(400,80,0.4,'sawtooth',0.3); noiseBurst(0.3,0.2,150); }
+function sndSnakeMove()  { beep(220,0.025,'square',0.04); }
+function sndSnakeLvl()   { [0,100,200,300].forEach(d=>beep(440+d*2,0.08,'sine',0.2,d/1000)); }
+
+// ── TETRIS ──
+function sndTetrisMove()  { beep(300,0.03,'square',0.06); }
+function sndTetrisRotate(){ beep(500,0.05,'sine',0.12); }
+function sndTetrisDrop()  { beep(180,0.08,'square',0.15); noiseBurst(0.06,0.1,300); }
+function sndTetrisClear1(){ beep(660,0.12,'sine',0.22); setTimeout(()=>beep(880,0.12,'sine',0.2),100); }
+function sndTetrisClear4(){ [0,80,160,240].forEach(d=>beep(440+d*4,0.1,'sine',0.25,d/1000)); }
+function sndTetrisOver()  { sweep(440,110,0.5,'sawtooth',0.28); }
+function sndTetrisTick()  { beep(250,0.02,'square',0.05); }
+
+// ── BREAKOUT ──
+function sndBreakPaddle() { beep(440,0.06,'sine',0.18); }
+function sndBreakBrick(hp){ beep(hp===1?600:800, 0.07,'square',0.18); }
+function sndBreakWall()   { beep(320,0.05,'sine',0.12); }
+function sndBreakLose()   { sweep(440,80,0.5,'sawtooth',0.28); noiseBurst(0.3,0.2,120); }
+function sndBreakWin()    { [0,80,160,240,320].forEach(d=>beep(523+d*3,0.1,'sine',0.2,d/1000)); }
+function sndBreakLaunch() { sweep(200,600,0.15,'sine',0.18); }
+
+// ── MEMORY ──
+function sndMemoryFlip()  { beep(520,0.07,'sine',0.14); }
+function sndMemoryMatch() { beep(660,0.08,'sine',0.2); setTimeout(()=>beep(880,0.1,'sine',0.2),90); }
+function sndMemoryWrong() { beep(200,0.15,'sawtooth',0.18); }
+function sndMemoryWin()   { [523,659,784,1047].forEach((f,i)=>beep(f,0.12,'sine',0.22,i*0.1)); }
+
+// ── FLAPPY ──
+function sndFlap()        { sweep(300,500,0.08,'sine',0.15); }
+function sndFlappyScore() { beep(784,0.07,'sine',0.2); setTimeout(()=>beep(1047,0.07,'sine',0.18),70); }
+function sndFlappyDie()   { sweep(500,80,0.4,'sawtooth',0.3); noiseBurst(0.25,0.25,100); }
+function sndFlappyStart() { sweep(400,800,0.12,'sine',0.2); }
+
+// ── WHACK-A-MOLE ──
+function sndWhackHit()    { noiseBurst(0.09,0.35,400); beep(300,0.07,'square',0.15); }
+function sndMolePop()     { sweep(200,600,0.1,'sine',0.12); }
+function sndWhackMiss()   { beep(160,0.1,'sawtooth',0.1); }
+function sndWhackEnd()    { [0,100,200].forEach(d=>beep(440-d,0.1,'sawtooth',0.15,d/1000)); }
+
+// ── QUIZ ──
+function sndQuizCorrect() { beep(660,0.08,'sine',0.2); setTimeout(()=>beep(880,0.1,'sine',0.2),90); }
+function sndQuizWrong()   { beep(220,0.18,'sawtooth',0.2); }
+function sndQuizSelect()  { beep(440,0.05,'sine',0.1); }
+function sndQuizFinish()  { [523,659,784,1047].forEach((f,i)=>beep(f,0.12,'sine',0.2,i*0.12)); }
+
+// ── UI ──
+function sndUIClick()     { beep(500,0.04,'sine',0.1); }
+function sndUIHover()     { beep(400,0.03,'sine',0.06); }
+</script>
+"""
+
+# ═══════════════════════════════════════════════════════
 #                    SNAKE GAME
 # ═══════════════════════════════════════════════════════
 if st.session_state.selected_game == "snake":
     components.html("""
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
-      .gh { font-family: 'Inter', sans-serif; }
-      .gh-tag { font-size:0.76rem; text-transform:uppercase; letter-spacing:0.2em; color:#ff6bcb; }
-      .gh-title { font-size:1.9rem; font-weight:900; color:#e5e7eb; margin:0.3rem 0 0.4rem; display:flex; align-items:center; gap:10px; }
-      .gh-icon { width:42px; height:42px; background:rgba(0,212,255,0.12); border:1px solid rgba(0,212,255,0.25); border-radius:12px; display:flex; align-items:center; justify-content:center; }
-      .gh-sub { color:#9ca3af; font-size:0.92rem; margin:0; }
-      .ctrl-chip { display:inline-flex; align-items:center; gap:5px; background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.2); border-radius:999px; padding:0.25rem 0.75rem; font-size:0.75rem; color:#00d4ff; margin-right:6px; }
+      body{margin:0;font-family:'Inter',sans-serif;}
+      .gh-tag{font-size:0.76rem;text-transform:uppercase;letter-spacing:0.2em;color:#ff6bcb;}
+      .gh-title{font-size:clamp(1.4rem,4vw,1.9rem);font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+      .gh-icon{width:42px;height:42px;background:rgba(0,212,255,0.12);border:1px solid rgba(0,212,255,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:999px;padding:0.25rem 0.75rem;font-size:0.72rem;color:#00d4ff;margin-right:6px;margin-bottom:4px;}
+      @media(max-width:500px){.gh-icon{width:34px;height:34px;} .ctrl-chip{font-size:0.65rem;padding:0.2rem 0.55rem;}}
     </style>
-    <div class="gh">
+    <div>
       <div class="gh-tag">Arcade · Classic</div>
       <div class="gh-title">
         <div class="gh-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
             <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
           </svg>
         </div>
         Snake
       </div>
-      <p class="gh-sub">
-        <span class="ctrl-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-          </svg>
-          Keyboard: Arrow / WASD
-        </span>
-        <span class="ctrl-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
-          </svg>
-          Mobile: Swipe / D-pad
-        </span>
+      <p style="color:#9ca3af;font-size:0.88rem;margin:0;flex-wrap:wrap;display:flex;gap:4px;">
+        <span class="ctrl-chip">⌨️ Arrow / WASD</span>
+        <span class="ctrl-chip">📱 Swipe / D-pad</span>
+        <span class="ctrl-chip">🔊 Sound On</span>
       </p>
     </div>
-    """, height=120)
+    """, height=115)
 
-    components.html("""
+    components.html(AUDIO_ENGINE_JS + """
     <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
@@ -542,97 +621,86 @@ if st.session_state.selected_game == "snake":
       body{background:transparent;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
            display:flex;flex-direction:column;align-items:center;padding:0 4px;overscroll-behavior:none;}
       .gw{width:100%;max-width:640px;}
-      .scoreboard{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;}
-      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:12px;padding:10px 6px;text-align:center;}
-      .sv{font-size:1.6rem;font-weight:900;background:linear-gradient(135deg,#00d4ff,#ff6bcb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
-      .sl{font-size:0.63rem;text-transform:uppercase;letter-spacing:0.12em;color:#9ca3af;margin-top:3px;}
-      .cwrap{position:relative;border-radius:16px;overflow:hidden;border:2px solid rgba(0,212,255,0.3);
+      .scoreboard{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px;}
+      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:12px;padding:8px 4px;text-align:center;}
+      .sv{font-size:clamp(1.1rem,4vw,1.6rem);font-weight:900;background:linear-gradient(135deg,#00d4ff,#ff6bcb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+      .sl{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-top:2px;}
+      .cwrap{position:relative;border-radius:14px;overflow:hidden;border:2px solid rgba(0,212,255,0.3);
              box-shadow:0 0 40px rgba(0,212,255,0.1),0 24px 60px rgba(0,0,0,0.9);touch-action:none;}
       canvas{display:block;width:100%;height:auto;}
       .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-          background:rgba(2,6,23,0.93);backdrop-filter:blur(10px);border-radius:14px;text-align:center;padding:1.5rem;}
-      .ov-icon{width:72px;height:72px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.25);
-               border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
-      .ov-title{font-size:1.7rem;font-weight:900;color:#e5e7eb;margin-bottom:0.5rem;}
-      .ov-sub{font-size:0.88rem;color:#9ca3af;line-height:1.6;max-width:300px;}
-      .pbtn{margin-top:1.2rem;padding:0.75rem 2rem;font-size:1rem;font-weight:700;color:#000;
+          background:rgba(2,6,23,0.93);backdrop-filter:blur(10px);border-radius:12px;text-align:center;padding:1.2rem;}
+      .ov-icon{width:64px;height:64px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.25);
+               border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;}
+      .ov-title{font-size:clamp(1.3rem,5vw,1.7rem);font-weight:900;color:#e5e7eb;margin-bottom:0.4rem;}
+      .ov-sub{font-size:clamp(0.78rem,2.5vw,0.88rem);color:#9ca3af;line-height:1.5;max-width:280px;}
+      .pbtn{margin-top:1rem;padding:0.7rem 1.8rem;font-size:0.95rem;font-weight:700;color:#000;
             background:linear-gradient(135deg,#00d4ff,#ff6bcb);border:none;border-radius:999px;
-            cursor:pointer;box-shadow:0 8px 24px rgba(0,212,255,0.3);transition:transform 0.15s,box-shadow 0.15s;
+            cursor:pointer;box-shadow:0 8px 24px rgba(0,212,255,0.3);transition:transform 0.15s;
             display:flex;align-items:center;gap:8px;}
-      .pbtn:hover{transform:scale(1.05);box-shadow:0 12px 32px rgba(0,212,255,0.4);}
+      .pbtn:hover{transform:scale(1.05);}
       .hidden{display:none!important;}
-      .speed-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
-      .slbl{font-size:0.73rem;color:#9ca3af;text-transform:uppercase;letter-spacing:0.1em;}
-      .sbtn{padding:0.4rem 1rem;font-size:0.78rem;font-weight:600;background:rgba(15,23,42,0.8);
-            border:1px solid rgba(148,163,184,0.25);border-radius:999px;color:#9ca3af;cursor:pointer;
-            transition:all 0.15s;display:inline-flex;align-items:center;gap:5px;}
+      .speed-row{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;flex-wrap:wrap;}
+      .slbl{font-size:0.7rem;color:#9ca3af;text-transform:uppercase;letter-spacing:0.1em;}
+      .sbtn{padding:0.35rem 0.9rem;font-size:0.75rem;font-weight:600;background:rgba(15,23,42,0.8);
+            border:1px solid rgba(148,163,184,0.22);border-radius:999px;color:#9ca3af;cursor:pointer;transition:all 0.15s;}
       .sbtn.active{border-color:#00d4ff;color:#00d4ff;background:rgba(0,212,255,0.1);}
+      /* Sound toggle */
+      .sound-btn{padding:0.35rem 0.9rem;font-size:0.75rem;font-weight:600;background:rgba(15,23,42,0.8);
+            border:1px solid rgba(0,212,255,0.3);border-radius:999px;color:#00d4ff;cursor:pointer;
+            transition:all 0.15s;display:flex;align-items:center;gap:5px;}
+      .sound-btn.muted{border-color:rgba(148,163,184,0.22);color:#6b7280;}
       /* D-PAD */
-      .dpad-section{margin-top:14px;text-align:center;}
-      .dpad-lbl{font-size:0.7rem;color:#9ca3af;margin-bottom:8px;text-transform:uppercase;
-                letter-spacing:0.1em;display:flex;align-items:center;justify-content:center;gap:6px;}
-      .dpad{display:inline-grid;grid-template-columns:52px 52px 52px;grid-template-rows:52px 52px;gap:6px;}
-      .db{width:52px;height:52px;border-radius:14px;border:1px solid rgba(148,163,184,0.25);
-          background:rgba(15,23,42,0.9);color:#e5e7eb;font-size:1.2rem;
+      .dpad-section{margin-top:12px;text-align:center;}
+      .dpad-lbl{font-size:0.68rem;color:#9ca3af;margin-bottom:6px;text-transform:uppercase;
+                letter-spacing:0.1em;display:flex;align-items:center;justify-content:center;gap:5px;}
+      .dpad{display:inline-grid;grid-template-columns:repeat(3,48px);grid-template-rows:repeat(3,48px);gap:5px;}
+      .db{width:48px;height:48px;border-radius:12px;border:1px solid rgba(148,163,184,0.22);
+          background:rgba(15,23,42,0.9);color:#e5e7eb;
           display:flex;align-items:center;justify-content:center;cursor:pointer;
-          box-shadow:0 4px 12px rgba(0,0,0,0.4);transition:all 0.1s;user-select:none;}
-      .db:active,.db.pressed{transform:scale(0.93);background:rgba(0,212,255,0.15);border-color:#00d4ff;box-shadow:0 0 12px rgba(0,212,255,0.25);}
+          box-shadow:0 4px 10px rgba(0,0,0,0.4);transition:all 0.1s;user-select:none;}
+      .db:active,.db.pressed{transform:scale(0.92);background:rgba(0,212,255,0.15);border-color:#00d4ff;}
       .db-up{grid-column:2;grid-row:1;}
       .db-left{grid-column:1;grid-row:2;}
-      .db-center{grid-column:2;grid-row:2;opacity:0.35;}
+      .db-center{grid-column:2;grid-row:2;opacity:0.3;pointer-events:none;}
       .db-right{grid-column:3;grid-row:2;}
-      /* Row 3 for down */
-      .dpad{grid-template-rows:52px 52px 52px;}
       .db-down{grid-column:2;grid-row:3;}
-      .swipe-hint{font-size:0.68rem;color:#4b5563;margin-top:8px;}
-      /* Mobile responsive */
-      @media (max-width: 640px) {{
-        .gw {{ padding: 0; }}
-        .scoreboard {{ grid-template-columns: repeat(2, 1fr); gap: 6px; }}
-        .sc {{ padding: 8px 4px; }}
-        .sv {{ font-size: 1.3rem; }}
-        .sl {{ font-size: 0.58rem; }}
-        .cwrap {{ border-radius: 12px; border-width: 1px; }}
-        .ov {{ padding: 1rem; }}
-        .ov-icon {{ width: 56px; height: 56px; border-radius: 16px; }}
-        .ov-icon svg {{ width: 28px; height: 28px; }}
-        .ov-title {{ font-size: 1.4rem; }}
-        .ov-sub {{ font-size: 0.8rem; }}
-        .pbtn {{ padding: 0.65rem 1.5rem; font-size: 0.9rem; }}
-        .dpad {{ grid-template-columns: 48px 48px 48px; grid-template-rows: 48px 48px 48px; gap: 5px; }}
-        .db {{ width: 48px; height: 48px; border-radius: 12px; }}
-        .db svg {{ width: 18px; height: 18px; }}
-        .speed-row {{ gap: 6px; }}
-        .sbtn {{ padding: 0.35rem 0.8rem; font-size: 0.72rem; }}
-      }}
+      .swipe-hint{font-size:0.65rem;color:#4b5563;margin-top:6px;}
+      @media(max-width:480px){
+        .scoreboard{grid-template-columns:repeat(2,1fr);}
+        .dpad{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:4px;}
+        .db{width:44px;height:44px;border-radius:10px;}
+        .ov{padding:1rem;}
+        .ov-icon{width:52px;height:52px;}
+      }
     </style>
     </head><body>
     <div class="gw">
       <div class="scoreboard">
         <div class="sc"><div class="sv" id="scoreD">0</div><div class="sl">Score</div></div>
         <div class="sc"><div class="sv" id="bestD" style="-webkit-text-fill-color:#34d399;color:#34d399">0</div><div class="sl">Best</div></div>
-        <div class="sc"><div class="sv" id="lvlD" style="font-size:1.3rem;">1</div><div class="sl">Level</div></div>
-        <div class="sc"><div class="sv" id="lenD" style="font-size:1.3rem;">1</div><div class="sl">Length</div></div>
+        <div class="sc"><div class="sv" id="lvlD" style="font-size:1.2rem;">1</div><div class="sl">Level</div></div>
+        <div class="sc"><div class="sv" id="lenD" style="font-size:1.2rem;">1</div><div class="sl">Length</div></div>
       </div>
       <div class="cwrap" id="cwrap">
         <canvas id="gc" width="600" height="480"></canvas>
         <div class="ov" id="startOv">
           <div class="ov-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
               <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
             </svg>
           </div>
           <div class="ov-title">Snake</div>
-          <div class="ov-sub">Eat food to grow · Avoid walls &amp; yourself<br/>Bonus stars give 5× points!</div>
+          <div class="ov-sub">Eat food to grow · Avoid walls &amp; yourself<br>⭐ Bonus stars give 5× points!</div>
           <button class="pbtn" id="startBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             Play Now
           </button>
         </div>
         <div class="ov hidden" id="overOv">
           <div class="ov-icon" style="background:rgba(255,107,203,0.1);border-color:rgba(255,107,203,0.3);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff6bcb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6bcb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"/>
               <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
               <line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
@@ -641,7 +709,7 @@ if st.session_state.selected_game == "snake":
           <div class="ov-title">Game Over</div>
           <div class="ov-sub" id="overMsg"></div>
           <button class="pbtn" id="restartBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
               <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/>
             </svg>
@@ -649,37 +717,28 @@ if st.session_state.selected_game == "snake":
           </button>
         </div>
       </div>
+
+      <!-- Speed + Sound row -->
       <div class="speed-row">
         <span class="slbl">Speed:</span>
-        <button class="sbtn active" id="spSlow" onclick="setSpeed('slow')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Slow
-        </button>
-        <button class="sbtn" id="spNormal" onclick="setSpeed('normal')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
-            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
-          </svg>Normal
-        </button>
-        <button class="sbtn" id="spFast" onclick="setSpeed('fast')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Fast
-        </button>
+        <button class="sbtn active" id="spSlow"   onclick="setSpeed('slow')">🐢 Slow</button>
+        <button class="sbtn"        id="spNormal" onclick="setSpeed('normal')">🐍 Normal</button>
+        <button class="sbtn"        id="spFast"   onclick="setSpeed('fast')">⚡ Fast</button>
+        <button class="sound-btn" id="soundBtn" onclick="toggleSound()">🔊 Sound</button>
       </div>
+
+      <!-- D-PAD -->
       <div class="dpad-section">
-        <div class="dpad-lbl">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
-          </svg>
-          Touch Controls
-        </div>
+        <div class="dpad-lbl">📱 Touch Controls</div>
         <div class="dpad">
-          <button class="db db-up" id="dUp" aria-label="Up">
+          <button class="db db-up"    id="dUp"    aria-label="Up">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
           </button>
-          <button class="db db-left" id="dLeft" aria-label="Left">
+          <button class="db db-left"  id="dLeft"  aria-label="Left">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
           <div class="db db-center" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/>
               <line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/>
               <rect x="2" y="6" width="20" height="12" rx="2"/>
@@ -688,58 +747,93 @@ if st.session_state.selected_game == "snake":
           <button class="db db-right" id="dRight" aria-label="Right">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
-          <button class="db db-down" id="dDown" aria-label="Down">
+          <button class="db db-down"  id="dDown"  aria-label="Down">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
         </div>
         <div class="swipe-hint">Swipe on canvas · Arrow keys · WASD</div>
       </div>
     </div>
+
     <script>
     const COLS=24,ROWS=20,CELL=25;
     const SPEEDS={slow:180,normal:120,fast:65};
     let sp='slow',tickMs=SPEEDS.slow,snake,dir,nextDir,food,bonus,bonusTick,score=0,hi=0,lv=1,loop,running=false;
+    let soundOn=true;
     const cv=document.getElementById('gc'),ctx=cv.getContext('2d');
-    function setSpeed(s){sp=s;tickMs=SPEEDS[s];document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));document.getElementById('sp'+s[0].toUpperCase()+s.slice(1)).classList.add('active');if(running){clearInterval(loop);loop=setInterval(tick,tickMs);}}
+
+    function toggleSound(){
+      soundOn=!soundOn;
+      const btn=document.getElementById('soundBtn');
+      btn.textContent=soundOn?'🔊 Sound':'🔇 Muted';
+      btn.classList.toggle('muted',!soundOn);
+      window._masterVol = soundOn ? 0.35 : 0;
+    }
+    function setSpeed(s){
+      sp=s;tickMs=SPEEDS[s];
+      document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
+      document.getElementById('sp'+s[0].toUpperCase()+s.slice(1)).classList.add('active');
+      if(running){clearInterval(loop);loop=setInterval(tick,tickMs);}
+    }
     function rand(n){return Math.floor(Math.random()*n);}
     function hit(p){return snake.some(s=>s.x===p.x&&s.y===p.y);}
     function placeFood(){do{food={x:rand(COLS),y:rand(ROWS)};}while(hit(food));bonus=null;bonusTick=0;}
     function reset(){snake=[{x:4,y:10},{x:3,y:10},{x:2,y:10}];dir={x:1,y:0};nextDir={x:1,y:0};score=0;lv=1;tickMs=SPEEDS[sp];placeFood();hud();}
-    function hud(){document.getElementById('scoreD').textContent=score;document.getElementById('bestD').textContent=hi;document.getElementById('lvlD').textContent=lv;document.getElementById('lenD').textContent=snake?snake.length:1;}
-    function start(){if(running)return;reset();running=true;document.getElementById('startOv').classList.add('hidden');document.getElementById('overOv').classList.add('hidden');loop=setInterval(tick,tickMs);}
+    function hud(){
+      document.getElementById('scoreD').textContent=score;
+      document.getElementById('bestD').textContent=hi;
+      document.getElementById('lvlD').textContent=lv;
+      document.getElementById('lenD').textContent=snake?snake.length:1;
+    }
+    function start(){
+      if(running)return;
+      reset();running=true;
+      sndSnakeMove();
+      document.getElementById('startOv').classList.add('hidden');
+      document.getElementById('overOv').classList.add('hidden');
+      loop=setInterval(tick,tickMs);
+    }
     function tick(){
       dir=nextDir;
       const h={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
       if(h.x<0||h.x>=COLS||h.y<0||h.y>=ROWS||snake.some(s=>s.x===h.x&&s.y===h.y)){end();return;}
       snake.unshift(h);
       let ate=false;
-      if(h.x===food.x&&h.y===food.y){score+=10;ate=true;placeFood();if(snake.length%5===0)lvUp();}
-      else if(bonus&&h.x===bonus.x&&h.y===bonus.y){score+=50;ate=true;bonus=null;bonusTick=0;}
+      if(h.x===food.x&&h.y===food.y){
+        score+=10;ate=true;sndSnakeEat();placeFood();
+        if(snake.length%5===0)lvUp();
+      } else if(bonus&&h.x===bonus.x&&h.y===bonus.y){
+        score+=50;ate=true;sndSnakeStar();bonus=null;bonusTick=0;
+      }
       if(!ate)snake.pop();
-      if(!bonus&&++bonusTick>30&&Math.random()<0.3){bonus={x:rand(COLS),y:rand(ROWS),life:20};}
-      if(bonus){if(--bonus.life<=0)bonus=null;if(bonus&&hit(bonus))bonus=null;}
+      if(!bonus&&++bonusTick>30&&Math.random()<0.3){
+        bonus={x:rand(COLS),y:rand(ROWS),life:20};
+        if(hit(bonus))bonus=null;
+      }
+      if(bonus){if(--bonus.life<=0)bonus=null;}
       if(score>hi)hi=score;
       hud();draw();
     }
-    function lvUp(){lv++;tickMs=Math.max(45,tickMs-8);clearInterval(loop);loop=setInterval(tick,tickMs);}
+    function lvUp(){lv++;sndSnakeLvl();tickMs=Math.max(45,tickMs-8);clearInterval(loop);loop=setInterval(tick,tickMs);}
     function end(){
-      running=false;clearInterval(loop);
+      running=false;clearInterval(loop);sndSnakeDie();
       const r=score>=300?'Incredible! Top tier!':score>=150?'Amazing work!':score>=80?'Good job!':'Keep grinding!';
-      document.getElementById('overMsg').innerHTML=`<strong style="color:#00d4ff;font-size:1.2rem;">${score} pts</strong><br>Length <strong>${snake.length}</strong> · Level <strong>${lv}</strong><br><span style="color:#fde68a;margin-top:6px;display:block;">${r}</span>`;
-      document.getElementById('overOv').classList.remove('hidden');draw();
+      document.getElementById('overMsg').innerHTML=`<strong style="color:#00d4ff;font-size:1.1rem;">${score} pts</strong><br>Length <strong>${snake.length}</strong> · Level <strong>${lv}</strong><br><span style="color:#fde68a;margin-top:4px;display:block;">${r}</span>`;
+      document.getElementById('overOv').classList.remove('hidden');
+      draw();
     }
     function draw(){
       ctx.fillStyle='#020617';ctx.fillRect(0,0,cv.width,cv.height);
       ctx.strokeStyle='rgba(148,163,184,0.04)';ctx.lineWidth=0.5;
       for(let c=0;c<=COLS;c++){ctx.beginPath();ctx.moveTo(c*CELL,0);ctx.lineTo(c*CELL,cv.height);ctx.stroke();}
       for(let r=0;r<=ROWS;r++){ctx.beginPath();ctx.moveTo(0,r*CELL);ctx.lineTo(cv.width,r*CELL);ctx.stroke();}
-      // glow head
+      // head glow
       const g=ctx.createRadialGradient(snake[0].x*CELL+CELL/2,snake[0].y*CELL+CELL/2,0,snake[0].x*CELL+CELL/2,snake[0].y*CELL+CELL/2,CELL*1.2);
       g.addColorStop(0,'rgba(0,212,255,0.4)');g.addColorStop(1,'transparent');
       ctx.fillStyle=g;ctx.beginPath();ctx.arc(snake[0].x*CELL+CELL/2,snake[0].y*CELL+CELL/2,CELL*1.2,0,Math.PI*2);ctx.fill();
       // head
       ctx.fillStyle='#00d4ff';ctx.beginPath();ctx.roundRect(snake[0].x*CELL+1,snake[0].y*CELL+1,CELL-2,CELL-2,6);ctx.fill();
-      // body gradient
+      // body
       for(let i=1;i<snake.length;i++){
         const t=1-i/snake.length;
         ctx.fillStyle=`rgba(14,165,233,${0.3+t*0.7})`;
@@ -750,6 +844,7 @@ if st.session_state.selected_game == "snake":
       fg.addColorStop(0,'rgba(255,107,203,0.5)');fg.addColorStop(1,'transparent');
       ctx.fillStyle=fg;ctx.beginPath();ctx.arc(food.x*CELL+CELL/2,food.y*CELL+CELL/2,CELL,0,Math.PI*2);ctx.fill();
       ctx.fillStyle='#ff6bcb';ctx.beginPath();ctx.arc(food.x*CELL+CELL/2,food.y*CELL+CELL/2,CELL*0.38,0,Math.PI*2);ctx.fill();
+      // bonus star
       if(bonus){
         const bg2=ctx.createRadialGradient(bonus.x*CELL+CELL/2,bonus.y*CELL+CELL/2,0,bonus.x*CELL+CELL/2,bonus.y*CELL+CELL/2,CELL);
         bg2.addColorStop(0,'rgba(253,230,138,0.5)');bg2.addColorStop(1,'transparent');
@@ -760,17 +855,19 @@ if st.session_state.selected_game == "snake":
       }
     }
     document.addEventListener('keydown',e=>{
-      if(['ArrowUp','w','W'].includes(e.key)){e.preventDefault();if(dir.y===0)nextDir={x:0,y:-1};}
-      else if(['ArrowDown','s','S'].includes(e.key)){e.preventDefault();if(dir.y===0)nextDir={x:0,y:1};}
-      else if(['ArrowLeft','a','A'].includes(e.key)){e.preventDefault();if(dir.x===0)nextDir={x:-1,y:0};}
-      else if(['ArrowRight','d','D'].includes(e.key)){e.preventDefault();if(dir.x===0)nextDir={x:1,y:0};}
+      const prev=dir;
+      if(['ArrowUp','w','W'].includes(e.key)){e.preventDefault();if(dir.y===0){nextDir={x:0,y:-1};sndSnakeMove();}}
+      else if(['ArrowDown','s','S'].includes(e.key)){e.preventDefault();if(dir.y===0){nextDir={x:0,y:1};sndSnakeMove();}}
+      else if(['ArrowLeft','a','A'].includes(e.key)){e.preventDefault();if(dir.x===0){nextDir={x:-1,y:0};sndSnakeMove();}}
+      else if(['ArrowRight','d','D'].includes(e.key)){e.preventDefault();if(dir.x===0){nextDir={x:1,y:0};sndSnakeMove();}}
     });
     const dmap={Up:{x:0,y:-1},Down:{x:0,y:1},Left:{x:-1,y:0},Right:{x:1,y:0}};
     ['Up','Down','Left','Right'].forEach(k=>{
       const btn=document.getElementById('d'+k);
       ['touchstart','mousedown'].forEach(ev=>btn.addEventListener(ev,e=>{
-        e.preventDefault();const nd=dmap[k];
-        if(nd.x!==-dir.x||nd.y!==-dir.y)nextDir=nd;
+        e.preventDefault();
+        const nd=dmap[k];
+        if(nd.x!==-dir.x||nd.y!==-dir.y){nextDir=nd;sndSnakeMove();}
         btn.classList.add('pressed');setTimeout(()=>btn.classList.remove('pressed'),150);
       },{passive:false}));
     });
@@ -780,16 +877,16 @@ if st.session_state.selected_game == "snake":
     cw.addEventListener('touchend',e=>{
       const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
       if(Math.abs(dx)>25||Math.abs(dy)>25){
-        if(Math.abs(dx)>Math.abs(dy)){const nd={x:dx>0?1:-1,y:0};if(nd.x!==-dir.x)nextDir=nd;}
-        else{const nd={x:0,y:dy>0?1:-1};if(nd.y!==-dir.y)nextDir=nd;}
+        if(Math.abs(dx)>Math.abs(dy)){const nd={x:dx>0?1:-1,y:0};if(nd.x!==-dir.x){nextDir=nd;sndSnakeMove();}}
+        else{const nd={x:0,y:dy>0?1:-1};if(nd.y!==-dir.y){nextDir=nd;sndSnakeMove();}}
       }
     },{passive:true});
-    document.getElementById('startBtn').addEventListener('click',start);
-    document.getElementById('restartBtn').addEventListener('click',start);
+    document.getElementById('startBtn').addEventListener('click',()=>{sndUIClick();start();});
+    document.getElementById('restartBtn').addEventListener('click',()=>{sndUIClick();start();});
     reset();draw();
     </script>
     </body></html>
-    """, height=640)
+    """, height=660)
 
 # ═══════════════════════════════════════════════════════
 #                    TETRIS GAME
@@ -798,37 +895,32 @@ if st.session_state.selected_game == "tetris":
     components.html("""
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
-      .gh{font-family:'Inter',sans-serif;}
+      body{margin:0;font-family:'Inter',sans-serif;}
       .gh-tag{font-size:0.76rem;text-transform:uppercase;letter-spacing:0.2em;color:#a78bfa;}
-      .gh-title{font-size:1.9rem;font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;}
-      .gh-icon{width:42px;height:42px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;}
-      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);border-radius:999px;padding:0.25rem 0.75rem;font-size:0.75rem;color:#a78bfa;margin-right:6px;}
+      .gh-title{font-size:clamp(1.4rem,4vw,1.9rem);font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+      .gh-icon{width:42px;height:42px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);border-radius:999px;padding:0.25rem 0.7rem;font-size:0.72rem;color:#a78bfa;margin-right:5px;margin-bottom:4px;}
     </style>
-    <div class="gh">
+    <div>
       <div class="gh-tag">Puzzle · Strategy</div>
       <div class="gh-title">
         <div class="gh-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="14" width="5" height="5" rx="1"/><rect x="7" y="14" width="5" height="5" rx="1"/>
             <rect x="12" y="14" width="5" height="5" rx="1"/><rect x="7" y="9" width="5" height="5" rx="1"/>
           </svg>
         </div>
         Tetris
       </div>
-      <p style="color:#9ca3af;font-size:0.92rem;margin:0;">
-        <span class="ctrl-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          ← → Move · ↑ Rotate · ↓ Soft Drop · Space Hard Drop
-        </span>
-        <span class="ctrl-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
-          D-pad + Rotate button
-        </span>
+      <p style="color:#9ca3af;font-size:0.88rem;margin:0;display:flex;flex-wrap:wrap;gap:4px;">
+        <span class="ctrl-chip">⌨️ ←→ Move · ↑ Rotate · Space Drop</span>
+        <span class="ctrl-chip">📱 D-pad + Rotate btn</span>
+        <span class="ctrl-chip">🔊 Sound On</span>
       </p>
     </div>
-    """, height=120)
+    """, height=115)
 
-    components.html("""
+    components.html(AUDIO_ENGINE_JS + """
     <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
@@ -837,64 +929,54 @@ if st.session_state.selected_game == "tetris":
       body{background:transparent;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
            display:flex;flex-direction:column;align-items:center;padding:0 4px;overscroll-behavior:none;}
       .gw{width:100%;max-width:640px;}
-      .layout{display:flex;gap:12px;align-items:flex-start;}
+      .layout{display:flex;gap:10px;align-items:flex-start;}
       .left-panel{flex:none;}
       .right-panel{flex:1;min-width:0;}
-      .scoreboard{display:flex;flex-direction:column;gap:8px;width:120px;}
-      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:12px;padding:10px 8px;text-align:center;}
-      .sv{font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,#a78bfa,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
-      .sl{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-top:3px;}
-      .next-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-bottom:6px;text-align:center;}
-      .next-cv{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:10px;display:block;margin:0 auto;}
-      .cwrap{position:relative;border-radius:14px;overflow:hidden;border:2px solid rgba(167,139,250,0.35);
+      .scoreboard{display:flex;flex-direction:column;gap:6px;width:110px;}
+      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:10px;padding:8px 6px;text-align:center;}
+      .sv{font-size:clamp(1rem,3vw,1.4rem);font-weight:900;background:linear-gradient(135deg,#a78bfa,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+      .sl{font-size:0.58rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-top:2px;}
+      .next-label{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-bottom:4px;text-align:center;}
+      .next-cv{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:8px;display:block;margin:0 auto;}
+      .cwrap{position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(167,139,250,0.35);
              box-shadow:0 0 40px rgba(167,139,250,0.1),0 24px 60px rgba(0,0,0,0.9);}
       canvas#tc{display:block;width:100%;height:auto;}
       .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-          background:rgba(2,6,23,0.93);backdrop-filter:blur(10px);border-radius:12px;text-align:center;padding:1.5rem;}
-      .ov-icon{width:68px;height:68px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.3);
-               border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
-      .ov-title{font-size:1.7rem;font-weight:900;color:#e5e7eb;margin-bottom:0.5rem;}
-      .ov-sub{font-size:0.88rem;color:#9ca3af;line-height:1.6;max-width:280px;}
-      .pbtn{margin-top:1.2rem;padding:0.75rem 2rem;font-size:1rem;font-weight:700;color:#000;
+          background:rgba(2,6,23,0.93);backdrop-filter:blur(10px);border-radius:10px;text-align:center;padding:1.2rem;}
+      .ov-icon{width:60px;height:60px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.3);
+               border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;}
+      .ov-title{font-size:clamp(1.3rem,4vw,1.7rem);font-weight:900;color:#e5e7eb;margin-bottom:0.4rem;}
+      .ov-sub{font-size:0.85rem;color:#9ca3af;line-height:1.5;max-width:240px;}
+      .pbtn{margin-top:1rem;padding:0.7rem 1.8rem;font-size:0.92rem;font-weight:700;color:#000;
             background:linear-gradient(135deg,#a78bfa,#00d4ff);border:none;border-radius:999px;
-            cursor:pointer;box-shadow:0 8px 24px rgba(167,139,250,0.3);transition:transform 0.15s;
+            cursor:pointer;box-shadow:0 8px 22px rgba(167,139,250,0.3);transition:transform 0.15s;
             display:flex;align-items:center;gap:8px;}
       .pbtn:hover{transform:scale(1.05);}
       .hidden{display:none!important;}
+      .sound-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;}
+      .sound-btn{padding:0.3rem 0.8rem;font-size:0.72rem;font-weight:600;background:rgba(15,23,42,0.8);
+            border:1px solid rgba(167,139,250,0.3);border-radius:999px;color:#a78bfa;cursor:pointer;transition:all 0.15s;}
+      .sound-btn.muted{border-color:rgba(148,163,184,0.2);color:#6b7280;}
       /* D-PAD for Tetris */
-      .dpad-section{margin-top:14px;text-align:center;}
-      .dpad-lbl{font-size:0.68rem;color:#9ca3af;margin-bottom:8px;text-transform:uppercase;
-                letter-spacing:0.1em;display:flex;align-items:center;justify-content:center;gap:6px;}
-      .tdpad{display:inline-grid;grid-template-columns:52px 52px 52px 52px;grid-template-rows:52px 52px;gap:6px;}
-      .db{width:52px;height:52px;border-radius:14px;border:1px solid rgba(148,163,184,0.22);
+      .dpad-section{margin-top:12px;text-align:center;}
+      .dpad-lbl{font-size:0.66rem;color:#9ca3af;margin-bottom:6px;text-transform:uppercase;
+                letter-spacing:0.1em;display:flex;align-items:center;justify-content:center;gap:5px;}
+      .tdpad{display:inline-grid;grid-template-columns:repeat(4,48px);grid-template-rows:repeat(2,48px);gap:5px;}
+      .db{width:48px;height:48px;border-radius:12px;border:1px solid rgba(148,163,184,0.2);
           background:rgba(15,23,42,0.9);color:#e5e7eb;
           display:flex;align-items:center;justify-content:center;cursor:pointer;
-          box-shadow:0 4px 12px rgba(0,0,0,0.4);transition:all 0.1s;user-select:none;font-size:1.2rem;}
-      .db:active,.db.pressed{transform:scale(0.93);background:rgba(167,139,250,0.15);border-color:#a78bfa;}
+          box-shadow:0 4px 10px rgba(0,0,0,0.4);transition:all 0.1s;user-select:none;}
+      .db:active,.db.pressed{transform:scale(0.92);background:rgba(167,139,250,0.15);border-color:#a78bfa;}
       .db-rotate{background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.35);color:#a78bfa;}
-      .db-hard{background:rgba(0,212,255,0.08);border-color:rgba(0,212,255,0.35);color:#00d4ff;font-size:0.7rem;font-weight:700;}
-      /* Mobile responsive */
-      @media (max-width: 640px) {{
-        .gw {{ padding: 0; }}
-        .layout {{ flex-direction: column; align-items: center; gap: 10px; }}
-        .left-panel {{ display: flex; flex-direction: row; gap: 8px; width: 100%; justify-content: center; }}
-        .scoreboard {{ flex-direction: row; width: auto; gap: 6px; }}
-        .sc {{ padding: 8px 10px; }}
-        .sv {{ font-size: 1.2rem; }}
-        .sl {{ font-size: 0.55rem; }}
-        .next-cv {{ width: 60px; height: 60px; }}
-        .next-label {{ font-size: 0.55rem; margin-bottom: 4px; }}
-        .cwrap {{ border-radius: 10px; border-width: 1px; }}
-        .ov {{ padding: 1rem; }}
-        .ov-icon {{ width: 52px; height: 52px; border-radius: 14px; }}
-        .ov-icon svg {{ width: 26px; height: 26px; }}
-        .ov-title {{ font-size: 1.3rem; }}
-        .ov-sub {{ font-size: 0.78rem; }}
-        .pbtn {{ padding: 0.6rem 1.4rem; font-size: 0.9rem; }}
-        .tdpad {{ grid-template-columns: 44px 44px 44px 44px; grid-template-rows: 44px 44px; gap: 5px; }}
-        .db {{ width: 44px; height: 44px; border-radius: 12px; }}
-        .db svg {{ width: 18px; height: 18px; }}
-      }}
+      .db-hard{background:rgba(0,212,255,0.08);border-color:rgba(0,212,255,0.35);color:#00d4ff;font-size:0.65rem;font-weight:700;}
+      @media(max-width:480px){
+        .layout{flex-direction:column;align-items:center;}
+        .left-panel{display:flex;flex-direction:row;gap:6px;width:100%;justify-content:center;}
+        .scoreboard{flex-direction:row;width:auto;gap:5px;}
+        .sc{padding:6px 8px;}
+        .tdpad{grid-template-columns:repeat(4,44px);grid-template-rows:repeat(2,44px);gap:4px;}
+        .db{width:44px;height:44px;border-radius:10px;}
+      }
     </style>
     </head><body>
     <div class="gw">
@@ -902,8 +984,8 @@ if st.session_state.selected_game == "tetris":
         <div class="left-panel">
           <div class="scoreboard">
             <div class="sc"><div class="sv" id="tScore">0</div><div class="sl">Score</div></div>
-            <div class="sc"><div class="sv" id="tLines" style="font-size:1.2rem;">0</div><div class="sl">Lines</div></div>
-            <div class="sc"><div class="sv" id="tLevel" style="font-size:1.2rem;">1</div><div class="sl">Level</div></div>
+            <div class="sc"><div class="sv" id="tLines" style="font-size:1.1rem;">0</div><div class="sl">Lines</div></div>
+            <div class="sc"><div class="sv" id="tLevel" style="font-size:1.1rem;">1</div><div class="sl">Level</div></div>
             <div style="margin-top:4px;">
               <div class="next-label">Next</div>
               <canvas id="nc" class="next-cv" width="80" height="80"></canvas>
@@ -915,7 +997,7 @@ if st.session_state.selected_game == "tetris":
             <canvas id="tc" width="200" height="400"></canvas>
             <div class="ov" id="tStart">
               <div class="ov-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="2" y="14" width="5" height="5" rx="1"/><rect x="7" y="14" width="5" height="5" rx="1"/>
                   <rect x="12" y="14" width="5" height="5" rx="1"/><rect x="7" y="9" width="5" height="5" rx="1"/>
                 </svg>
@@ -923,13 +1005,13 @@ if st.session_state.selected_game == "tetris":
               <div class="ov-title">Tetris</div>
               <div class="ov-sub">Stack tetrominoes · Clear lines · Beat your score!</div>
               <button class="pbtn" id="tStartBtn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 Play Now
               </button>
             </div>
             <div class="ov hidden" id="tOver">
               <div class="ov-icon" style="background:rgba(255,107,203,0.1);border-color:rgba(255,107,203,0.3);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ff6bcb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff6bcb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="10"/>
                   <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
                   <line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
@@ -938,7 +1020,7 @@ if st.session_state.selected_game == "tetris":
               <div class="ov-title">Game Over</div>
               <div class="ov-sub" id="tMsg"></div>
               <button class="pbtn" id="tRestart">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
                   <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/>
                 </svg>
@@ -948,35 +1030,36 @@ if st.session_state.selected_game == "tetris":
           </div>
         </div>
       </div>
+
+      <div class="sound-row">
+        <button class="sound-btn" id="tSoundBtn" onclick="toggleSound()">🔊 Sound</button>
+      </div>
+
       <div class="dpad-section">
-        <div class="dpad-lbl">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
-          </svg>
-          Touch Controls
-        </div>
+        <div class="dpad-lbl">📱 Touch Controls</div>
         <div class="tdpad">
           <button class="db db-rotate" id="tRotate" title="Rotate">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
             </svg>
           </button>
           <button class="db" id="tLeft" aria-label="Left">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
           <button class="db" id="tRight" aria-label="Right">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
           <button class="db db-hard" id="tHard" title="Hard Drop">DROP</button>
           <div></div>
           <button class="db" id="tDown" aria-label="Soft Drop">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div></div><div></div>
         </div>
-        <div style="font-size:0.68rem;color:#4b5563;margin-top:8px;">Arrow keys · Space=Hard drop · ↑=Rotate</div>
+        <div style="font-size:0.65rem;color:#4b5563;margin-top:6px;">Arrow keys · Space=Hard drop · ↑=Rotate</div>
       </div>
     </div>
+
     <script>
     const COLS=10,ROWS=20,CS=20;
     const PIECES=[
@@ -991,6 +1074,15 @@ if st.session_state.selected_game == "tetris":
     const cv=document.getElementById('tc'),ctx=cv.getContext('2d');
     const nc=document.getElementById('nc'),nctx=nc.getContext('2d');
     let board,cur,curX,curY,next,score,lines,level,speed,loop,running=false;
+    let soundOn=true;
+
+    function toggleSound(){
+      soundOn=!soundOn;
+      const btn=document.getElementById('tSoundBtn');
+      btn.textContent=soundOn?'🔊 Sound':'🔇 Muted';
+      btn.classList.toggle('muted',!soundOn);
+      window._masterVol=soundOn?0.35:0;
+    }
     function newBoard(){board=Array.from({length:ROWS},()=>Array(COLS).fill(0));}
     function randPiece(){return JSON.parse(JSON.stringify(PIECES[Math.floor(Math.random()*PIECES.length)]));}
     function reset(){
@@ -999,7 +1091,11 @@ if st.session_state.selected_game == "tetris":
       curX=Math.floor(COLS/2)-Math.floor(cur.s[0].length/2);curY=0;
       hud();
     }
-    function hud(){document.getElementById('tScore').textContent=score;document.getElementById('tLines').textContent=lines;document.getElementById('tLevel').textContent=level;}
+    function hud(){
+      document.getElementById('tScore').textContent=score;
+      document.getElementById('tLines').textContent=lines;
+      document.getElementById('tLevel').textContent=level;
+    }
     function fits(p,ox,oy){return p.s.every((r,ri)=>r.every((v,ci)=>!v||((oy+ri>=0)&&oy+ri<ROWS&&ox+ci>=0&&ox+ci<COLS&&!board[oy+ri][ox+ci])));}
     function place(){cur.s.forEach((r,ri)=>r.forEach((v,ci)=>{if(v)board[curY+ri][curX+ci]=cur.c;}));}
     function clearLines(){
@@ -1008,73 +1104,102 @@ if st.session_state.selected_game == "tetris":
         if(board[r].every(v=>v)){board.splice(r,1);board.unshift(Array(COLS).fill(0));c++;}
         else r--;
       }
-      if(c){lines+=c;score+=[0,100,300,500,800][c]*level;if(lines%10===0){level++;speed=Math.max(100,speed-80);clearInterval(loop);loop=setInterval(drop,speed);}}
+      if(c){
+        lines+=c;score+=[0,100,300,500,800][c]*level;
+        if(c>=4)sndTetrisClear4();else sndTetrisClear1();
+        if(lines%10===0){level++;speed=Math.max(100,speed-80);clearInterval(loop);loop=setInterval(drop,speed);}
+        hud();
+      }
     }
-    function rotate(p){const r={s:p.s[0].map((_,i)=>p.s.map(r=>r[i]).reverse()),c:p.c};return r;}
+    function rotate(p){return{s:p.s[0].map((_,i)=>p.s.map(r=>r[i]).reverse()),c:p.c};}
     function drop(){
       if(fits(cur,curX,curY+1)){curY++;}
       else{
-        place();clearLines();
+        place();clearLines();sndTetrisDrop();
         cur=next;next=randPiece();
         curX=Math.floor(COLS/2)-Math.floor(cur.s[0].length/2);curY=0;
         if(!fits(cur,curX,curY)){endGame();return;}
       }
       hud();draw();
     }
-    function hardDrop(){while(fits(cur,curX,curY+1))curY++;drop();}
-    function endGame(){running=false;clearInterval(loop);document.getElementById('tMsg').innerHTML=`<strong style="color:#a78bfa;font-size:1.1rem;">${score} pts</strong><br>Lines: <strong>${lines}</strong> · Level: <strong>${level}</strong>`;document.getElementById('tOver').classList.remove('hidden');}
+    function hardDrop(){while(fits(cur,curX,curY+1))curY++;sndTetrisDrop();drop();}
+    function endGame(){
+      running=false;clearInterval(loop);sndTetrisOver();
+      document.getElementById('tMsg').innerHTML=`<strong style="color:#a78bfa;font-size:1.1rem;">${score} pts</strong><br>Lines: <strong>${lines}</strong> · Level: <strong>${level}</strong>`;
+      document.getElementById('tOver').classList.remove('hidden');
+    }
     function ghostY(){let gy=curY;while(fits(cur,curX,gy+1))gy++;return gy;}
     function draw(){
       ctx.fillStyle='#020617';ctx.fillRect(0,0,cv.width,cv.height);
-      // grid
       ctx.strokeStyle='rgba(148,163,184,0.05)';ctx.lineWidth=0.5;
       for(let c=0;c<=COLS;c++){ctx.beginPath();ctx.moveTo(c*CS,0);ctx.lineTo(c*CS,cv.height);ctx.stroke();}
       for(let r=0;r<=ROWS;r++){ctx.beginPath();ctx.moveTo(0,r*CS);ctx.lineTo(cv.width,r*CS);ctx.stroke();}
-      // board
-      board.forEach((row,ri)=>row.forEach((v,ci)=>{if(v){ctx.fillStyle=v;ctx.beginPath();ctx.roundRect(ci*CS+1,ri*CS+1,CS-2,CS-2,3);ctx.fill();ctx.fillStyle='rgba(255,255,255,0.15)';ctx.beginPath();ctx.roundRect(ci*CS+1,ri*CS+1,CS-2,4,3);ctx.fill();}}));
-      // ghost
+      board.forEach((row,ri)=>row.forEach((v,ci)=>{
+        if(v){
+          ctx.fillStyle=v;ctx.beginPath();ctx.roundRect(ci*CS+1,ri*CS+1,CS-2,CS-2,3);ctx.fill();
+          ctx.fillStyle='rgba(255,255,255,0.15)';ctx.beginPath();ctx.roundRect(ci*CS+1,ri*CS+1,CS-2,4,3);ctx.fill();
+        }
+      }));
       const gy=ghostY();
-      cur.s.forEach((r,ri)=>r.forEach((v,ci)=>{if(v){ctx.fillStyle='rgba(255,255,255,0.08)';ctx.beginPath();ctx.roundRect((curX+ci)*CS+1,(gy+ri)*CS+1,CS-2,CS-2,3);ctx.fill();}}));
-      // current
-      cur.s.forEach((r,ri)=>r.forEach((v,ci)=>{if(v){ctx.fillStyle=cur.c;ctx.beginPath();ctx.roundRect((curX+ci)*CS+1,(curY+ri)*CS+1,CS-2,CS-2,3);ctx.fill();ctx.fillStyle='rgba(255,255,255,0.2)';ctx.beginPath();ctx.roundRect((curX+ci)*CS+1,(curY+ri)*CS+1,CS-2,4,3);ctx.fill();}}));
-      // next preview
+      cur.s.forEach((r,ri)=>r.forEach((v,ci)=>{
+        if(v){ctx.fillStyle='rgba(255,255,255,0.07)';ctx.beginPath();ctx.roundRect((curX+ci)*CS+1,(gy+ri)*CS+1,CS-2,CS-2,3);ctx.fill();}
+      }));
+      cur.s.forEach((r,ri)=>r.forEach((v,ci)=>{
+        if(v){
+          ctx.fillStyle=cur.c;ctx.beginPath();ctx.roundRect((curX+ci)*CS+1,(curY+ri)*CS+1,CS-2,CS-2,3);ctx.fill();
+          ctx.fillStyle='rgba(255,255,255,0.2)';ctx.beginPath();ctx.roundRect((curX+ci)*CS+1,(curY+ri)*CS+1,CS-2,4,3);ctx.fill();
+        }
+      }));
       nctx.fillStyle='rgba(15,23,42,0.97)';nctx.fillRect(0,0,nc.width,nc.height);
       const ps=4,ox=Math.floor((nc.width/ps-next.s[0].length)/2)*ps,oy=Math.floor((nc.height/ps-next.s.length)/2)*ps;
-      next.s.forEach((r,ri)=>r.forEach((v,ci)=>{if(v){nctx.fillStyle=next.c;nctx.beginPath();nctx.roundRect(ox+ci*ps+0.5,oy+ri*ps+0.5,ps-1,ps-1,1);nctx.fill();}}));
+      next.s.forEach((r,ri)=>r.forEach((v,ci)=>{
+        if(v){nctx.fillStyle=next.c;nctx.beginPath();nctx.roundRect(ox+ci*ps+0.5,oy+ri*ps+0.5,ps-1,ps-1,1);nctx.fill();}
+      }));
     }
-    function start(){if(running)return;reset();running=true;document.getElementById('tStart').classList.add('hidden');document.getElementById('tOver').classList.add('hidden');loop=setInterval(drop,speed);}
+    function start(){
+      if(running)return;reset();running=true;
+      document.getElementById('tStart').classList.add('hidden');
+      document.getElementById('tOver').classList.add('hidden');
+      loop=setInterval(drop,speed);
+    }
     document.addEventListener('keydown',e=>{
       if(!running)return;
-      if(e.key==='ArrowLeft'){if(fits(cur,curX-1,curY))curX--;}
-      else if(e.key==='ArrowRight'){if(fits(cur,curX+1,curY))curX++;}
+      if(e.key==='ArrowLeft'){if(fits(cur,curX-1,curY)){curX--;sndTetrisMove();}}
+      else if(e.key==='ArrowRight'){if(fits(cur,curX+1,curY)){curX++;sndTetrisMove();}}
       else if(e.key==='ArrowDown'){drop();}
-      else if(e.key==='ArrowUp'||e.key==='w'||e.key==='W'){const r=rotate(cur);if(fits(r,curX,curY))cur=r;}
+      else if(e.key==='ArrowUp'||e.key==='w'||e.key==='W'){const r=rotate(cur);if(fits(r,curX,curY)){cur=r;sndTetrisRotate();}}
       else if(e.key===' '){e.preventDefault();hardDrop();return;}
       else return;
       e.preventDefault();draw();
     });
-    function dbtn(id,fn){const b=document.getElementById(id);['touchstart','mousedown'].forEach(ev=>b.addEventListener(ev,e=>{e.preventDefault();if(running)fn();b.classList.add('pressed');setTimeout(()=>b.classList.remove('pressed'),150);},{passive:false}));}
-    dbtn('tLeft',()=>{if(fits(cur,curX-1,curY)){curX--;draw();}});
-    dbtn('tRight',()=>{if(fits(cur,curX+1,curY)){curX++;draw();}});
+    function dbtn(id,fn){
+      const b=document.getElementById(id);
+      ['touchstart','mousedown'].forEach(ev=>b.addEventListener(ev,e=>{
+        e.preventDefault();if(running)fn();
+        b.classList.add('pressed');setTimeout(()=>b.classList.remove('pressed'),150);
+      },{passive:false}));
+    }
+    dbtn('tLeft',()=>{if(fits(cur,curX-1,curY)){curX--;sndTetrisMove();draw();}});
+    dbtn('tRight',()=>{if(fits(cur,curX+1,curY)){curX++;sndTetrisMove();draw();}});
     dbtn('tDown',()=>drop());
-    dbtn('tRotate',()=>{const r=rotate(cur);if(fits(r,curX,curY)){cur=r;draw();}});
+    dbtn('tRotate',()=>{const r=rotate(cur);if(fits(r,curX,curY)){cur=r;sndTetrisRotate();draw();}});
     dbtn('tHard',()=>hardDrop());
     let tsx=0,tsy=0;
     cv.addEventListener('touchstart',e=>{tsx=e.touches[0].clientX;tsy=e.touches[0].clientY;},{passive:true});
     cv.addEventListener('touchend',e=>{
       const dx=e.changedTouches[0].clientX-tsx,dy=e.changedTouches[0].clientY-tsy;
       if(!running)return;
-      if(Math.abs(dx)<10&&Math.abs(dy)<10){const r=rotate(cur);if(fits(r,curX,curY)){cur=r;draw();}}
-      else if(Math.abs(dx)>Math.abs(dy)){if(fits(cur,curX+(dx>0?1:-1),curY)){curX+=(dx>0?1:-1);draw();}}
+      if(Math.abs(dx)<10&&Math.abs(dy)<10){const r=rotate(cur);if(fits(r,curX,curY)){cur=r;sndTetrisRotate();draw();}}
+      else if(Math.abs(dx)>Math.abs(dy)){if(fits(cur,curX+(dx>0?1:-1),curY)){curX+=(dx>0?1:-1);sndTetrisMove();draw();}}
       else if(dy>0)drop();
-      else{const r=rotate(cur);if(fits(r,curX,curY)){cur=r;draw();}}
+      else{const r=rotate(cur);if(fits(r,curX,curY)){cur=r;sndTetrisRotate();draw();}}
     },{passive:true});
-    document.getElementById('tStartBtn').addEventListener('click',start);
-    document.getElementById('tRestart').addEventListener('click',start);
+    document.getElementById('tStartBtn').addEventListener('click',()=>{sndUIClick();start();});
+    document.getElementById('tRestart').addEventListener('click',()=>{sndUIClick();start();});
     reset();draw();
     </script>
     </body></html>
-    """, height=640)
+    """, height=660)
 
 # ═══════════════════════════════════════════════════════
 #                    BREAKOUT GAME
@@ -1083,37 +1208,32 @@ if st.session_state.selected_game == "breakout":
     components.html("""
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
-      .gh{font-family:'Inter',sans-serif;}
+      body{margin:0;font-family:'Inter',sans-serif;}
       .gh-tag{font-size:0.76rem;text-transform:uppercase;letter-spacing:0.2em;color:#fb923c;}
-      .gh-title{font-size:1.9rem;font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;}
-      .gh-icon{width:42px;height:42px;background:rgba(251,146,60,0.12);border:1px solid rgba(251,146,60,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;}
-      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);border-radius:999px;padding:0.25rem 0.75rem;font-size:0.75rem;color:#fb923c;margin-right:6px;}
+      .gh-title{font-size:clamp(1.4rem,4vw,1.9rem);font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+      .gh-icon{width:42px;height:42px;background:rgba(251,146,60,0.12);border:1px solid rgba(251,146,60,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);border-radius:999px;padding:0.25rem 0.7rem;font-size:0.72rem;color:#fb923c;margin-right:5px;margin-bottom:4px;}
     </style>
-    <div class="gh">
+    <div>
       <div class="gh-tag">Arcade · Reflex</div>
       <div class="gh-title">
         <div class="gh-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="4" width="20" height="4" rx="1"/><rect x="6" y="10" width="12" height="3" rx="1"/>
             <rect x="9" y="20" width="6" height="2" rx="1"/><circle cx="12" cy="17" r="1.5"/>
           </svg>
         </div>
         Breakout
       </div>
-      <p style="color:#9ca3af;font-size:0.92rem;margin:0;">
-        <span class="ctrl-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          Mouse / Arrow Keys
-        </span>
-        <span class="ctrl-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
-          Drag / ← → buttons
-        </span>
+      <p style="color:#9ca3af;font-size:0.88rem;margin:0;display:flex;flex-wrap:wrap;gap:4px;">
+        <span class="ctrl-chip">🖱️ Mouse / Arrow Keys</span>
+        <span class="ctrl-chip">📱 Drag / ← → buttons</span>
+        <span class="ctrl-chip">🔊 Sound On</span>
       </p>
     </div>
-    """, height=120)
+    """, height=115)
 
-    components.html("""
+    components.html(AUDIO_ENGINE_JS + """
     <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
@@ -1122,57 +1242,65 @@ if st.session_state.selected_game == "breakout":
       body{background:transparent;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
            display:flex;flex-direction:column;align-items:center;padding:0 4px;overscroll-behavior:none;}
       .gw{width:100%;max-width:640px;}
-      .scoreboard{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
-      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:12px;padding:10px 6px;text-align:center;}
-      .sv{font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#fb923c,#fde047);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
-      .sl{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-top:3px;}
-      .cwrap{position:relative;border-radius:16px;overflow:hidden;border:2px solid rgba(251,146,60,0.35);
+      .scoreboard{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;}
+      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:12px;padding:8px 4px;text-align:center;}
+      .sv{font-size:clamp(1.1rem,4vw,1.5rem);font-weight:900;background:linear-gradient(135deg,#fb923c,#fde047);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+      .sl{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-top:2px;}
+      .cwrap{position:relative;border-radius:14px;overflow:hidden;border:2px solid rgba(251,146,60,0.35);
              box-shadow:0 0 40px rgba(251,146,60,0.1),0 24px 60px rgba(0,0,0,0.9);touch-action:none;cursor:none;}
       canvas{display:block;width:100%;height:auto;}
       .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-          background:rgba(2,6,23,0.93);backdrop-filter:blur(10px);border-radius:14px;text-align:center;padding:1.5rem;}
-      .ov-icon{width:68px;height:68px;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.3);
-               border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
-      .ov-title{font-size:1.7rem;font-weight:900;color:#e5e7eb;margin-bottom:0.5rem;}
-      .ov-sub{font-size:0.88rem;color:#9ca3af;line-height:1.6;max-width:280px;}
-      .pbtn{margin-top:1.2rem;padding:0.75rem 2rem;font-size:1rem;font-weight:700;color:#000;
+          background:rgba(2,6,23,0.93);backdrop-filter:blur(10px);border-radius:12px;text-align:center;padding:1.2rem;}
+      .ov-icon{width:60px;height:60px;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.3);
+               border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;}
+      .ov-title{font-size:clamp(1.3rem,4vw,1.7rem);font-weight:900;color:#e5e7eb;margin-bottom:0.4rem;}
+      .ov-sub{font-size:0.85rem;color:#9ca3af;line-height:1.5;max-width:250px;}
+      .pbtn{margin-top:1rem;padding:0.7rem 1.8rem;font-size:0.92rem;font-weight:700;color:#000;
             background:linear-gradient(135deg,#fb923c,#fde047);border:none;border-radius:999px;
-            cursor:pointer;box-shadow:0 8px 24px rgba(251,146,60,0.35);transition:transform 0.15s;
+            cursor:pointer;box-shadow:0 8px 22px rgba(251,146,60,0.35);transition:transform 0.15s;
             display:flex;align-items:center;gap:8px;}
       .pbtn:hover{transform:scale(1.05);}
       .hidden{display:none!important;}
-      .ctrl-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;}
-      .cb{width:72px;height:56px;border-radius:14px;border:1px solid rgba(251,146,60,0.3);
+      .ctrl-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px;flex-wrap:wrap;}
+      .cb{width:70px;height:52px;border-radius:12px;border:1px solid rgba(251,146,60,0.3);
           background:rgba(15,23,42,0.9);color:#fb923c;display:flex;align-items:center;justify-content:center;
-          cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.4);transition:all 0.1s;user-select:none;font-size:1.3rem;}
-      .cb:active,.cb.pressed{transform:scale(0.93);background:rgba(251,146,60,0.15);}
+          cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.4);transition:all 0.1s;user-select:none;}
+      .cb:active,.cb.pressed{transform:scale(0.92);background:rgba(251,146,60,0.15);}
+      .sound-btn{padding:0.3rem 0.8rem;font-size:0.72rem;font-weight:600;background:rgba(15,23,42,0.8);
+            border:1px solid rgba(251,146,60,0.3);border-radius:999px;color:#fb923c;cursor:pointer;transition:all 0.15s;}
+      .sound-btn.muted{border-color:rgba(148,163,184,0.2);color:#6b7280;}
+      @media(max-width:480px){
+        .scoreboard{grid-template-columns:repeat(3,1fr);}
+        .cb{width:60px;height:46px;}
+        .ov{padding:1rem;}
+      }
     </style>
     </head><body>
     <div class="gw">
       <div class="scoreboard">
         <div class="sc"><div class="sv" id="bScore">0</div><div class="sl">Score</div></div>
         <div class="sc"><div class="sv" id="bLives" style="-webkit-text-fill-color:#f472b6;color:#f472b6;">3</div><div class="sl">Lives</div></div>
-        <div class="sc"><div class="sv" id="bLevel" style="font-size:1.2rem;">1</div><div class="sl">Level</div></div>
+        <div class="sc"><div class="sv" id="bLevel" style="font-size:1.1rem;">1</div><div class="sl">Level</div></div>
       </div>
       <div class="cwrap" id="bcwrap">
-        <canvas id="bc" width="480" height="420"></canvas>
+        <canvas id="bc" width="480" height="380"></canvas>
         <div class="ov" id="bStart">
           <div class="ov-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="4" width="20" height="4" rx="1"/><rect x="6" y="10" width="12" height="3" rx="1"/>
               <rect x="9" y="20" width="6" height="2" rx="1"/><circle cx="12" cy="17" r="1.5"/>
             </svg>
           </div>
           <div class="ov-title">Breakout</div>
-          <div class="ov-sub">Move the paddle to bounce the ball and break all bricks!</div>
+          <div class="ov-sub">Bounce the ball and break all bricks!</div>
           <button class="pbtn" id="bStartBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             Play Now
           </button>
         </div>
         <div class="ov hidden" id="bOver">
           <div class="ov-icon" style="background:rgba(255,107,203,0.1);border-color:rgba(255,107,203,0.3);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ff6bcb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff6bcb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"/>
               <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
               <line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
@@ -1181,7 +1309,7 @@ if st.session_state.selected_game == "breakout":
           <div class="ov-title" id="bOverTitle">Game Over</div>
           <div class="ov-sub" id="bMsg"></div>
           <button class="pbtn" id="bRestart" style="background:linear-gradient(135deg,#fb923c,#fde047);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
               <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/>
             </svg>
@@ -1190,9 +1318,10 @@ if st.session_state.selected_game == "breakout":
         </div>
         <div class="ov hidden" id="bWin">
           <div class="ov-icon" style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.3);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-              <path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+              <path d="M4 22h16"/>
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
               <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
               <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
             </svg>
@@ -1201,17 +1330,17 @@ if st.session_state.selected_game == "breakout":
           <div class="ov-sub" id="bWinMsg"></div>
           <button class="pbtn" id="bNextLevel" style="background:linear-gradient(135deg,#34d399,#00d4ff);">
             Next Level
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
         </div>
       </div>
       <div class="ctrl-row">
         <button class="cb" id="bLeft" aria-label="Move Left">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <div style="font-size:0.7rem;color:#6b7280;text-align:center;">Move<br>Paddle</div>
+        <button class="sound-btn" id="bSoundBtn" onclick="toggleSound()">🔊 Sound</button>
         <button class="cb" id="bRight" aria-label="Move Right">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
     </div>
@@ -1222,58 +1351,70 @@ if st.session_state.selected_game == "breakout":
     const BCOLORS=['#ff6bcb','#fb923c','#fde047','#34d399','#00d4ff','#a78bfa'];
     let paddle,ball,bricks,score,lives,level,running=false,raf=null;
     let keys={left:false,right:false};
-    let mouseX=-1,touchX=-1;
+    let mouseX=-1,touchX=-1,soundOn=true;
+
+    function toggleSound(){
+      soundOn=!soundOn;
+      const btn=document.getElementById('bSoundBtn');
+      btn.textContent=soundOn?'🔊 Sound':'🔇 Muted';
+      btn.classList.toggle('muted',!soundOn);
+      window._masterVol=soundOn?0.35:0;
+    }
     function makeBricks(){
       bricks=[];
       for(let r=0;r<ROWS_B;r++)for(let c=0;c<COLS_B;c++){
         const bw=(W-BPAD*(COLS_B+1))/COLS_B;
-        bricks.push({x:BPAD+c*(bw+BPAD),y:40+r*(18+BPAD),w:bw,h:18,color:BCOLORS[r%BCOLORS.length],hp:2,alive:true});
+        bricks.push({x:BPAD+c*(bw+BPAD),y:36+r*(16+BPAD),w:bw,h:16,color:BCOLORS[r%BCOLORS.length],hp:2,alive:true});
       }
     }
     function reset(keepLevel=false){
       if(!keepLevel){score=0;lives=3;level=1;}
-      const bw=90,ph=12,spd=3.5+level*0.4;
-      paddle={x:W/2-bw/2,y:H-30,w:bw,h:ph,speed:7};
-      ball={x:W/2,y:H-50,r:7,vx:spd*(Math.random()>0.5?1:-1),vy:-spd};
+      const bw=88,ph=11,spd=3.5+level*0.4;
+      paddle={x:W/2-bw/2,y:H-26,w:bw,h:ph,speed:7};
+      ball={x:W/2,y:H-46,r:7,vx:spd*(Math.random()>0.5?1:-1),vy:-spd};
       makeBricks();hud();
     }
-    function hud(){document.getElementById('bScore').textContent=score;document.getElementById('bLives').textContent=lives;document.getElementById('bLevel').textContent=level;}
+    function hud(){
+      document.getElementById('bScore').textContent=score;
+      document.getElementById('bLives').textContent=lives;
+      document.getElementById('bLevel').textContent=level;
+    }
     function start(keepLevel=false){
       if(running)return;reset(keepLevel);running=true;
+      sndBreakLaunch();
       ['bStart','bOver','bWin'].forEach(id=>document.getElementById(id).classList.add('hidden'));
       if(raf)cancelAnimationFrame(raf);gameLoop();
     }
-    function gameLoop(){
-      if(!running)return;
-      update();draw();raf=requestAnimationFrame(gameLoop);
-    }
+    function gameLoop(){if(!running)return;update();draw();raf=requestAnimationFrame(gameLoop);}
     function update(){
-      // paddle movement
       if(keys.left)paddle.x-=paddle.speed;
       if(keys.right)paddle.x+=paddle.speed;
       if(mouseX>0)paddle.x=mouseX-paddle.w/2;
       if(touchX>0)paddle.x=touchX-paddle.w/2;
       paddle.x=Math.max(0,Math.min(W-paddle.w,paddle.x));
-      // ball
       ball.x+=ball.vx;ball.y+=ball.vy;
-      if(ball.x-ball.r<0){ball.x=ball.r;ball.vx*=-1;}
-      if(ball.x+ball.r>W){ball.x=W-ball.r;ball.vx*=-1;}
-      if(ball.y-ball.r<0){ball.y=ball.r;ball.vy*=-1;}
-      if(ball.y+ball.r>H){lives--;hud();if(lives<=0){endGame();}else{ball.x=W/2;ball.y=H-50;ball.vx=(3.5+level*0.4)*(Math.random()>0.5?1:-1);ball.vy=-(3.5+level*0.4);}return;}
-      // paddle
+      if(ball.x-ball.r<0){ball.x=ball.r;ball.vx*=-1;sndBreakWall();}
+      if(ball.x+ball.r>W){ball.x=W-ball.r;ball.vx*=-1;sndBreakWall();}
+      if(ball.y-ball.r<0){ball.y=ball.r;ball.vy*=-1;sndBreakWall();}
+      if(ball.y+ball.r>H){
+        lives--;hud();sndBreakLose();
+        if(lives<=0){endGame();}
+        else{ball.x=W/2;ball.y=H-46;ball.vx=(3.5+level*0.4)*(Math.random()>0.5?1:-1);ball.vy=-(3.5+level*0.4);}
+        return;
+      }
       if(ball.y+ball.r>=paddle.y&&ball.y+ball.r<=paddle.y+paddle.h&&ball.x>=paddle.x&&ball.x<=paddle.x+paddle.w){
         ball.vy=Math.abs(ball.vy)*-1;
-        const hit=(ball.x-(paddle.x+paddle.w/2))/(paddle.w/2);
-        ball.vx=(4+level*0.4)*hit;
+        const hitRatio=(ball.x-(paddle.x+paddle.w/2))/(paddle.w/2);
+        ball.vx=(4+level*0.4)*hitRatio;
         ball.y=paddle.y-ball.r;
+        sndBreakPaddle();
       }
-      // bricks
       let alive=0;
       bricks.forEach(b=>{
         if(!b.alive)return;alive++;
         if(ball.x+ball.r>b.x&&ball.x-ball.r<b.x+b.w&&ball.y+ball.r>b.y&&ball.y-ball.r<b.y+b.h){
-          b.hp--;if(b.hp<=0){b.alive=false;score+=10*level;}
-          else score+=5*level;
+          b.hp--;sndBreakBrick(b.hp);
+          if(b.hp<=0){b.alive=false;score+=10*level;}else score+=5*level;
           const ox=Math.min(ball.x+ball.r-b.x,b.x+b.w-(ball.x-ball.r));
           const oy=Math.min(ball.y+ball.r-b.y,b.y+b.h-(ball.y-ball.r));
           if(ox<oy)ball.vx*=-1;else ball.vy*=-1;
@@ -1283,27 +1424,23 @@ if st.session_state.selected_game == "breakout":
       if(alive===0)winLevel();
     }
     function endGame(){running=false;cancelAnimationFrame(raf);document.getElementById('bMsg').innerHTML=`<strong style="color:#fb923c;font-size:1.1rem;">${score} pts</strong><br>Level <strong>${level}</strong>`;document.getElementById('bOver').classList.remove('hidden');}
-    function winLevel(){running=false;cancelAnimationFrame(raf);level++;document.getElementById('bWinMsg').innerHTML=`<strong style="color:#34d399;font-size:1.1rem;">${score} pts</strong><br>Moving to Level <strong>${level}</strong>!`;document.getElementById('bWin').classList.remove('hidden');}
+    function winLevel(){running=false;cancelAnimationFrame(raf);sndBreakWin();level++;document.getElementById('bWinMsg').innerHTML=`<strong style="color:#34d399;font-size:1.1rem;">${score} pts</strong><br>Moving to Level <strong>${level}</strong>!`;document.getElementById('bWin').classList.remove('hidden');}
     function draw(){
       ctx.fillStyle='#020617';ctx.fillRect(0,0,W,H);
       ctx.strokeStyle='rgba(148,163,184,0.04)';ctx.lineWidth=0.5;
       for(let c=0;c<10;c++){ctx.beginPath();ctx.moveTo(c*W/10,0);ctx.lineTo(c*W/10,H);ctx.stroke();}
-      // bricks
       bricks.forEach(b=>{
         if(!b.alive)return;
-        const alpha=b.hp===2?1:0.5;
-        ctx.globalAlpha=alpha;
-        ctx.fillStyle=b.color;ctx.beginPath();ctx.roundRect(b.x,b.y,b.w,b.h,4);ctx.fill();
-        ctx.fillStyle='rgba(255,255,255,0.2)';ctx.beginPath();ctx.roundRect(b.x,b.y,b.w,4,4);ctx.fill();
+        ctx.globalAlpha=b.hp===2?1:0.5;
+        ctx.fillStyle=b.color;ctx.beginPath();ctx.roundRect(b.x,b.y,b.w,b.h,3);ctx.fill();
+        ctx.fillStyle='rgba(255,255,255,0.2)';ctx.beginPath();ctx.roundRect(b.x,b.y,b.w,3,3);ctx.fill();
         ctx.globalAlpha=1;
       });
-      // paddle glow
       const pg=ctx.createLinearGradient(paddle.x,0,paddle.x+paddle.w,0);
       pg.addColorStop(0,'#fb923c');pg.addColorStop(1,'#fde047');
-      ctx.shadowColor='#fb923c';ctx.shadowBlur=15;
+      ctx.shadowColor='#fb923c';ctx.shadowBlur=14;
       ctx.fillStyle=pg;ctx.beginPath();ctx.roundRect(paddle.x,paddle.y,paddle.w,paddle.h,paddle.h/2);ctx.fill();
       ctx.shadowBlur=0;
-      // ball glow
       const bg=ctx.createRadialGradient(ball.x,ball.y,0,ball.x,ball.y,ball.r*2);
       bg.addColorStop(0,'rgba(251,146,60,0.6)');bg.addColorStop(1,'transparent');
       ctx.fillStyle=bg;ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r*2,0,Math.PI*2);ctx.fill();
@@ -1326,13 +1463,13 @@ if st.session_state.selected_game == "breakout":
     }
     dbtn('bLeft',()=>keys.left=true,()=>keys.left=false);
     dbtn('bRight',()=>keys.right=true,()=>keys.right=false);
-    document.getElementById('bStartBtn').addEventListener('click',()=>start());
-    document.getElementById('bRestart').addEventListener('click',()=>start());
-    document.getElementById('bNextLevel').addEventListener('click',()=>start(true));
+    document.getElementById('bStartBtn').addEventListener('click',()=>{sndUIClick();start();});
+    document.getElementById('bRestart').addEventListener('click',()=>{sndUIClick();start();});
+    document.getElementById('bNextLevel').addEventListener('click',()=>{sndUIClick();start(true);});
     hud();draw();
     </script>
     </body></html>
-    """, height=600)
+    """, height=580)
 
 # ═══════════════════════════════════════════════════════
 #                    MEMORY MATCH GAME
@@ -1341,33 +1478,31 @@ if st.session_state.selected_game == "memory":
     components.html("""
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
-      .gh{font-family:'Inter',sans-serif;}
+      body{margin:0;font-family:'Inter',sans-serif;}
       .gh-tag{font-size:0.76rem;text-transform:uppercase;letter-spacing:0.2em;color:#34d399;}
-      .gh-title{font-size:1.9rem;font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;}
-      .gh-icon{width:42px;height:42px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;}
-      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:999px;padding:0.25rem 0.75rem;font-size:0.75rem;color:#34d399;margin-right:6px;}
+      .gh-title{font-size:clamp(1.4rem,4vw,1.9rem);font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+      .gh-icon{width:42px;height:42px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:999px;padding:0.25rem 0.7rem;font-size:0.72rem;color:#34d399;margin-right:5px;margin-bottom:4px;}
     </style>
-    <div class="gh">
+    <div>
       <div class="gh-tag">Brain · Memory</div>
       <div class="gh-title">
         <div class="gh-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="3" width="9" height="9" rx="2"/><rect x="13" y="3" width="9" height="9" rx="2"/>
             <rect x="2" y="13" width="9" height="9" rx="2"/><rect x="13" y="13" width="9" height="9" rx="2"/>
           </svg>
         </div>
         Memory Match
       </div>
-      <p style="color:#9ca3af;font-size:0.92rem;margin:0;">
-        <span class="ctrl-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          Click / Tap cards to flip
-        </span>
+      <p style="color:#9ca3af;font-size:0.88rem;margin:0;display:flex;flex-wrap:wrap;gap:4px;">
+        <span class="ctrl-chip">🖱️ Click / Tap cards to flip</span>
+        <span class="ctrl-chip">🔊 Sound On</span>
       </p>
     </div>
-    """, height=120)
+    """, height=115)
 
-    components.html("""
+    components.html(AUDIO_ENGINE_JS + """
     <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
@@ -1375,54 +1510,63 @@ if st.session_state.selected_game == "memory":
       *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
       body{background:transparent;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
            display:flex;flex-direction:column;align-items:center;padding:0 4px;}
-      .gw{width:100%;max-width:540px;}
-      .scoreboard{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
-      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:12px;padding:10px 6px;text-align:center;}
-      .sv{font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#34d399,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
-      .sl{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-top:3px;}
-      .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-      .card{aspect-ratio:1;border-radius:12px;cursor:pointer;perspective:800px;transition:transform 0.1s;}
+      .gw{width:100%;max-width:520px;}
+      .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px;}
+      .scoreboard{display:flex;gap:6px;}
+      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:10px;padding:8px 12px;text-align:center;}
+      .sv{font-size:clamp(1rem,3.5vw,1.4rem);font-weight:900;background:linear-gradient(135deg,#34d399,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+      .sl{font-size:0.58rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-top:2px;}
+      .sound-btn{padding:0.3rem 0.8rem;font-size:0.72rem;font-weight:600;background:rgba(15,23,42,0.8);
+            border:1px solid rgba(52,211,153,0.3);border-radius:999px;color:#34d399;cursor:pointer;transition:all 0.15s;}
+      .sound-btn.muted{border-color:rgba(148,163,184,0.2);color:#6b7280;}
+      .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+      @media(max-width:380px){.grid{gap:5px;}}
+      .card{aspect-ratio:1;border-radius:10px;cursor:pointer;perspective:800px;transition:transform 0.1s;}
       .card:active{transform:scale(0.95);}
       .card-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);}
       .card.flipped .card-inner{transform:rotateY(180deg);}
-      .card-front,.card-back{position:absolute;inset:0;border-radius:12px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;}
-      .card-front{background:linear-gradient(135deg,rgba(15,23,42,0.97),rgba(30,41,59,0.97));border:1px solid rgba(148,163,184,0.2);font-size:1.8rem;}
-      .card-back{background:linear-gradient(135deg,rgba(52,211,153,0.1),rgba(0,212,255,0.1));border:1px solid rgba(52,211,153,0.3);transform:rotateY(180deg);font-size:2rem;}
-      .card.matched .card-back{background:linear-gradient(135deg,rgba(52,211,153,0.2),rgba(0,212,255,0.2));border-color:rgba(52,211,153,0.5);box-shadow:0 0 20px rgba(52,211,153,0.2);}
-      .card-front svg{opacity:0.3;}
-      .win-banner{background:linear-gradient(135deg,rgba(52,211,153,0.12),rgba(0,212,255,0.12));
-                  border:1px solid rgba(52,211,153,0.35);border-radius:16px;
-                  padding:1.5rem;text-align:center;margin-top:1rem;display:none;}
+      .card-front,.card-back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;}
+      .card-front{background:linear-gradient(135deg,rgba(15,23,42,0.97),rgba(30,41,59,0.97));border:1px solid rgba(148,163,184,0.18);}
+      .card-back{background:linear-gradient(135deg,rgba(52,211,153,0.1),rgba(0,212,255,0.1));border:1px solid rgba(52,211,153,0.3);transform:rotateY(180deg);}
+      .card.matched .card-back{background:linear-gradient(135deg,rgba(52,211,153,0.2),rgba(0,212,255,0.2));border-color:rgba(52,211,153,0.5);box-shadow:0 0 18px rgba(52,211,153,0.2);}
+      .card-front svg{opacity:0.25;}
+      .card-back svg{width:clamp(22px,5vw,32px);height:clamp(22px,5vw,32px);}
+      .win-banner{background:linear-gradient(135deg,rgba(52,211,153,0.1),rgba(0,212,255,0.1));
+                  border:1px solid rgba(52,211,153,0.3);border-radius:14px;
+                  padding:1.2rem;text-align:center;margin-top:10px;display:none;}
       .win-banner.show{display:block;}
-      .win-title{font-size:1.6rem;font-weight:900;color:#e5e7eb;margin-bottom:0.3rem;}
-      .win-sub{font-size:0.9rem;color:#9ca3af;}
-      .rbtn{margin-top:1rem;padding:0.65rem 1.5rem;font-size:0.9rem;font-weight:700;
+      .win-title{font-size:1.4rem;font-weight:900;color:#e5e7eb;margin-bottom:0.3rem;}
+      .win-sub{font-size:0.85rem;color:#9ca3af;}
+      .rbtn{margin-top:0.8rem;padding:0.6rem 1.4rem;font-size:0.88rem;font-weight:700;
             color:#000;background:linear-gradient(135deg,#34d399,#00d4ff);border:none;
-            border-radius:999px;cursor:pointer;box-shadow:0 8px 20px rgba(52,211,153,0.25);
-            transition:transform 0.15s;display:inline-flex;align-items:center;gap:6px;}
+            border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform 0.15s;}
       .rbtn:hover{transform:scale(1.05);}
     </style>
     </head><body>
     <div class="gw">
-      <div class="scoreboard">
-        <div class="sc"><div class="sv" id="mMoves">0</div><div class="sl">Moves</div></div>
-        <div class="sc"><div class="sv" id="mMatches" style="-webkit-text-fill-color:#34d399;color:#34d399;">0/8</div><div class="sl">Matched</div></div>
-        <div class="sc"><div class="sv" id="mTime" style="font-size:1.1rem;">0:00</div><div class="sl">Time</div></div>
+      <div class="top-row">
+        <div class="scoreboard">
+          <div class="sc"><div class="sv" id="mMoves">0</div><div class="sl">Moves</div></div>
+          <div class="sc"><div class="sv" id="mMatches" style="-webkit-text-fill-color:#34d399;color:#34d399;">0/8</div><div class="sl">Matched</div></div>
+          <div class="sc"><div class="sv" id="mTime" style="font-size:1rem;">0:00</div><div class="sl">Time</div></div>
+        </div>
+        <button class="sound-btn" id="mSoundBtn" onclick="toggleSound()">🔊 Sound</button>
       </div>
       <div class="grid" id="mgrid"></div>
       <div class="win-banner" id="winBanner">
-        <div style="width:56px;height:56px;background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.35);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div style="width:52px;height:52px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.3);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.7rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-            <path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+            <path d="M4 22h16"/>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
             <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
             <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
           </svg>
         </div>
-        <div class="win-title">Congratulations!</div>
+        <div class="win-title">Congratulations! 🎉</div>
         <div class="win-sub" id="winMsg"></div>
         <button class="rbtn" onclick="startGame()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
             <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/>
           </svg>
@@ -1431,17 +1575,25 @@ if st.session_state.selected_game == "memory":
       </div>
     </div>
     <script>
+    let soundOn=true;
+    function toggleSound(){
+      soundOn=!soundOn;
+      const btn=document.getElementById('mSoundBtn');
+      btn.textContent=soundOn?'🔊 Sound':'🔇 Muted';
+      btn.classList.toggle('muted',!soundOn);
+      window._masterVol=soundOn?0.35:0;
+    }
     const ICONS=[
-      `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>`,
-      `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6bcb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
-      `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>`,
-      `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fde047" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
-      `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`,
-      `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
-      `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>`,
-      `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ff6bcb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fde047" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
     ];
-    const BACK_ICON=`<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(148,163,184,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg>`;
+    const BACK_ICON=`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(148,163,184,0.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg>`;
     let cards=[],flipped=[],matched=0,moves=0,lock=false,timerInt=null,secs=0,started=false;
     function pad(n){return String(n).padStart(2,'0');}
     function fmtTime(s){return`${Math.floor(s/60)}:${pad(s%60)}`;}
@@ -1470,19 +1622,34 @@ if st.session_state.selected_game == "memory":
     function flip(i){
       if(lock||cards[i].flipped||cards[i].matched)return;
       if(!started){started=true;timerInt=setInterval(()=>{secs++;document.getElementById('mTime').textContent=fmtTime(secs);},1000);}
+      sndMemoryFlip();
       cards[i].flipped=true;flipped.push(i);renderGrid();
       if(flipped.length===2){
         moves++;document.getElementById('mMoves').textContent=moves;lock=true;
         const [a,b]=flipped;
-        if(cards[a].icon===cards[b].icon){cards[a].matched=cards[b].matched=true;matched++;document.getElementById('mMatches').textContent=`${matched}/8`;flipped=[];lock=false;renderGrid();if(matched===8)win();}
-        else{setTimeout(()=>{cards[a].flipped=cards[b].flipped=false;flipped=[];lock=false;renderGrid();},900);}
+        if(cards[a].icon===cards[b].icon){
+          sndMemoryMatch();
+          cards[a].matched=cards[b].matched=true;matched++;
+          document.getElementById('mMatches').textContent=`${matched}/8`;
+          flipped=[];lock=false;renderGrid();
+          if(matched===8)win();
+        } else {
+          sndMemoryWrong();
+          setTimeout(()=>{cards[a].flipped=cards[b].flipped=false;flipped=[];lock=false;renderGrid();},900);
+        }
       }
     }
-    function win(){clearInterval(timerInt);const t=fmtTime(secs);const r=moves<=20?'Perfect memory!':moves<=30?'Great job!':'Keep practising!';document.getElementById('winMsg').innerHTML=`Finished in <strong style="color:#00d4ff;">${moves} moves</strong> · <strong style="color:#34d399;">${t}</strong><br><span style="color:#fde047;margin-top:4px;display:block;">${r}</span>`;document.getElementById('winBanner').classList.add('show');}
+    function win(){
+      clearInterval(timerInt);sndMemoryWin();
+      const t=fmtTime(secs);
+      const r=moves<=20?'Perfect memory!':moves<=30?'Great job!':'Keep practising!';
+      document.getElementById('winMsg').innerHTML=`Finished in <strong style="color:#00d4ff;">${moves} moves</strong> · <strong style="color:#34d399;">${t}</strong><br><span style="color:#fde047;margin-top:4px;display:block;">${r}</span>`;
+      document.getElementById('winBanner').classList.add('show');
+    }
     startGame();
     </script>
     </body></html>
-    """, height=600)
+    """, height=580)
 
 # ═══════════════════════════════════════════════════════
 #                    FLAPPY BIRD GAME
@@ -1491,37 +1658,32 @@ if st.session_state.selected_game == "flappy":
     components.html("""
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
-      .gh{font-family:'Inter',sans-serif;}
+      body{margin:0;font-family:'Inter',sans-serif;}
       .gh-tag{font-size:0.76rem;text-transform:uppercase;letter-spacing:0.2em;color:#fbbf24;}
-      .gh-title{font-size:1.9rem;font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;}
-      .gh-icon{width:42px;height:42px;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;}
-      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:999px;padding:0.25rem 0.75rem;font-size:0.75rem;color:#fbbf24;margin-right:6px;}
+      .gh-title{font-size:clamp(1.4rem,4vw,1.9rem);font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+      .gh-icon{width:42px;height:42px;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:999px;padding:0.25rem 0.7rem;font-size:0.72rem;color:#fbbf24;margin-right:5px;margin-bottom:4px;}
     </style>
-    <div class="gh">
+    <div>
       <div class="gh-tag">Endless · Reflex</div>
       <div class="gh-title">
         <div class="gh-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 4c0 1.5-1.5 3-3.5 3C11.5 7 10 5.5 10 4s1.5-3 3.5-3S17 2.5 17 4z"/>
             <path d="M10 7c-2 0-4 1-5 3l-2 4h5l1 4h3l1-4h2l2-4c-1-2-3-3-5-3"/>
           </svg>
         </div>
         Flappy Bird
       </div>
-      <p style="color:#9ca3af;font-size:0.92rem;margin:0;">
-        <span class="ctrl-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          Space / Click
-        </span>
-        <span class="ctrl-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
-          Tap screen / Flap button
-        </span>
+      <p style="color:#9ca3af;font-size:0.88rem;margin:0;display:flex;flex-wrap:wrap;gap:4px;">
+        <span class="ctrl-chip">⌨️ Space / Click</span>
+        <span class="ctrl-chip">📱 Tap / Flap button</span>
+        <span class="ctrl-chip">🔊 Sound On</span>
       </p>
     </div>
-    """, height=120)
+    """, height=115)
 
-    components.html("""
+    components.html(AUDIO_ENGINE_JS + """
     <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
@@ -1529,58 +1691,65 @@ if st.session_state.selected_game == "flappy":
       *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
       body{background:transparent;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
            display:flex;flex-direction:column;align-items:center;padding:0 4px;}
-      .gw{width:100%;max-width:400px;}
-      .scoreboard{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:10px;}
-      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:12px;padding:10px 6px;text-align:center;}
-      .sv{font-size:1.6rem;font-weight:900;background:linear-gradient(135deg,#fbbf24,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
-      .sl{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-top:3px;}
-      .cwrap{position:relative;border-radius:16px;overflow:hidden;border:2px solid rgba(251,191,36,0.35);
+      .gw{width:100%;max-width:380px;}
+      .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px;}
+      .scoreboard{display:flex;gap:6px;}
+      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:10px;padding:8px 14px;text-align:center;}
+      .sv{font-size:clamp(1.1rem,4vw,1.6rem);font-weight:900;background:linear-gradient(135deg,#fbbf24,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+      .sl{font-size:0.58rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-top:2px;}
+      .sound-btn{padding:0.3rem 0.8rem;font-size:0.72rem;font-weight:600;background:rgba(15,23,42,0.8);
+            border:1px solid rgba(251,191,36,0.3);border-radius:999px;color:#fbbf24;cursor:pointer;transition:all 0.15s;}
+      .sound-btn.muted{border-color:rgba(148,163,184,0.2);color:#6b7280;}
+      .cwrap{position:relative;border-radius:14px;overflow:hidden;border:2px solid rgba(251,191,36,0.35);
              box-shadow:0 0 40px rgba(251,191,36,0.1),0 24px 60px rgba(0,0,0,0.9);touch-action:none;cursor:pointer;}
       canvas{display:block;width:100%;height:auto;}
       .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-          background:rgba(2,6,23,0.93);backdrop-filter:blur(10px);border-radius:14px;text-align:center;padding:1.5rem;}
-      .ov-icon{width:68px;height:68px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);
-               border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
-      .ov-title{font-size:1.7rem;font-weight:900;color:#e5e7eb;margin-bottom:0.5rem;}
-      .ov-sub{font-size:0.88rem;color:#9ca3af;line-height:1.6;}
-      .pbtn{margin-top:1.2rem;padding:0.75rem 2rem;font-size:1rem;font-weight:700;color:#000;
+          background:rgba(2,6,23,0.93);backdrop-filter:blur(10px);border-radius:12px;text-align:center;padding:1.2rem;}
+      .ov-icon{width:60px;height:60px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);
+               border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;}
+      .ov-title{font-size:clamp(1.3rem,4vw,1.7rem);font-weight:900;color:#e5e7eb;margin-bottom:0.4rem;}
+      .ov-sub{font-size:0.85rem;color:#9ca3af;line-height:1.5;}
+      .pbtn{margin-top:1rem;padding:0.7rem 1.8rem;font-size:0.92rem;font-weight:700;color:#000;
             background:linear-gradient(135deg,#fbbf24,#fb923c);border:none;border-radius:999px;
-            cursor:pointer;box-shadow:0 8px 24px rgba(251,191,36,0.3);transition:transform 0.15s;
+            cursor:pointer;box-shadow:0 8px 22px rgba(251,191,36,0.3);transition:transform 0.15s;
             display:flex;align-items:center;gap:8px;}
       .pbtn:hover{transform:scale(1.05);}
       .hidden{display:none!important;}
-      .flap-btn{width:100%;margin-top:12px;padding:1rem;font-size:1.1rem;font-weight:700;
-                background:linear-gradient(135deg,rgba(251,191,36,0.15),rgba(251,146,60,0.15));
-                border:2px solid rgba(251,191,36,0.4);border-radius:16px;color:#fbbf24;
+      .flap-btn{width:100%;margin-top:10px;padding:0.9rem;font-size:1rem;font-weight:700;
+                background:linear-gradient(135deg,rgba(251,191,36,0.12),rgba(251,146,60,0.12));
+                border:2px solid rgba(251,191,36,0.4);border-radius:14px;color:#fbbf24;
                 cursor:pointer;transition:all 0.1s;display:flex;align-items:center;justify-content:center;gap:8px;
                 user-select:none;}
-      .flap-btn:active{transform:scale(0.97);background:rgba(251,191,36,0.25);}
+      .flap-btn:active{transform:scale(0.97);background:rgba(251,191,36,0.22);}
     </style>
     </head><body>
     <div class="gw">
-      <div class="scoreboard">
-        <div class="sc"><div class="sv" id="fScore">0</div><div class="sl">Score</div></div>
-        <div class="sc"><div class="sv" id="fBest" style="-webkit-text-fill-color:#34d399;color:#34d399;">0</div><div class="sl">Best</div></div>
+      <div class="top-row">
+        <div class="scoreboard">
+          <div class="sc"><div class="sv" id="fScore">0</div><div class="sl">Score</div></div>
+          <div class="sc"><div class="sv" id="fBest" style="-webkit-text-fill-color:#34d399;color:#34d399;">0</div><div class="sl">Best</div></div>
+        </div>
+        <button class="sound-btn" id="fSoundBtn" onclick="toggleSound()">🔊 Sound</button>
       </div>
       <div class="cwrap" id="fcwrap">
-        <canvas id="fc" width="320" height="480"></canvas>
+        <canvas id="fc" width="320" height="460"></canvas>
         <div class="ov" id="fStart">
           <div class="ov-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 4c0 1.5-1.5 3-3.5 3C11.5 7 10 5.5 10 4s1.5-3 3.5-3S17 2.5 17 4z"/>
               <path d="M10 7c-2 0-4 1-5 3l-2 4h5l1 4h3l1-4h2l2-4c-1-2-3-3-5-3"/>
             </svg>
           </div>
           <div class="ov-title">Flappy Bird</div>
-          <div class="ov-sub">Tap · Click · or Press Space<br>to flap your wings!</div>
+          <div class="ov-sub">Tap · Click · Press Space<br>to flap your wings!</div>
           <button class="pbtn" id="fStartBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             Fly Now
           </button>
         </div>
         <div class="ov hidden" id="fOver">
           <div class="ov-icon" style="background:rgba(255,107,203,0.1);border-color:rgba(255,107,203,0.3);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ff6bcb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff6bcb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"/>
               <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
               <line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
@@ -1589,7 +1758,7 @@ if st.session_state.selected_game == "flappy":
           <div class="ov-title">Crashed!</div>
           <div class="ov-sub" id="fMsg"></div>
           <button class="pbtn" id="fRestart">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
               <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/>
             </svg>
@@ -1598,7 +1767,7 @@ if st.session_state.selected_game == "flappy":
         </div>
       </div>
       <button class="flap-btn" id="flapBtn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="18 15 12 9 6 15"/>
         </svg>
         FLAP!
@@ -1607,71 +1776,86 @@ if st.session_state.selected_game == "flappy":
     <script>
     const cv=document.getElementById('fc'),ctx=cv.getContext('2d');
     const W=cv.width,H=cv.height;
-    let bird,pipes,score,best=0,raf=null,running=false,frame=0;
-    const GAP=140,PW=52,SPEED=2.4,GRAVITY=0.45,FLAP=-8.5;
-    function reset(){bird={x:80,y:H/2,v:0,r:18,angle:0};pipes=[];score=0;frame=0;hud();}
+    let bird,pipes,score,best=0,raf=null,running=false,frame=0,soundOn=true;
+    const GAP=138,PW=50,SPEED=2.4,GRAVITY=0.44,FLAP=-8.5;
+
+    function toggleSound(){
+      soundOn=!soundOn;
+      const btn=document.getElementById('fSoundBtn');
+      btn.textContent=soundOn?'🔊 Sound':'🔇 Muted';
+      btn.classList.toggle('muted',!soundOn);
+      window._masterVol=soundOn?0.35:0;
+    }
+    function reset(){bird={x:80,y:H/2,v:0,r:17,angle:0};pipes=[];score=0;frame=0;hud();}
     function hud(){document.getElementById('fScore').textContent=score;document.getElementById('fBest').textContent=best;}
-    function flap(){if(!running)return;bird.v=FLAP;}
-    function start(){if(running)return;reset();running=true;['fStart','fOver'].forEach(id=>document.getElementById(id).classList.add('hidden'));if(raf)cancelAnimationFrame(raf);loop();}
+    function flap(){if(!running)return;bird.v=FLAP;sndFlap();}
+    function start(){
+      if(running)return;reset();running=true;sndFlappyStart();
+      ['fStart','fOver'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+      if(raf)cancelAnimationFrame(raf);loop();
+    }
     function loop(){if(!running)return;update();draw();raf=requestAnimationFrame(loop);}
     function update(){
-      bird.v+=GRAVITY;bird.y+=bird.v;bird.angle=Math.min(Math.PI/4,Math.max(-Math.PI/4,bird.v*0.06));
-      frame++;if(frame%90===0){const top=60+Math.random()*(H-GAP-120);pipes.push({x:W,top,bottom:top+GAP,scored:false});}
-      pipes.forEach(p=>{p.x-=SPEED;if(!p.scored&&p.x+PW<bird.x){p.scored=true;score++;if(score>best)best=score;hud();}});
+      bird.v+=GRAVITY;bird.y+=bird.v;
+      bird.angle=Math.min(Math.PI/4,Math.max(-Math.PI/4,bird.v*0.06));
+      frame++;
+      if(frame%90===0){
+        const top=55+Math.random()*(H-GAP-110);
+        pipes.push({x:W,top,bottom:top+GAP,scored:false});
+      }
+      pipes.forEach(p=>{
+        p.x-=SPEED;
+        if(!p.scored&&p.x+PW<bird.x){p.scored=true;score++;if(score>best)best=score;sndFlappyScore();hud();}
+      });
       pipes=pipes.filter(p=>p.x+PW>0);
       if(bird.y-bird.r<0||bird.y+bird.r>H)endGame();
       pipes.forEach(p=>{if(bird.x+bird.r>p.x&&bird.x-bird.r<p.x+PW&&(bird.y-bird.r<p.top||bird.y+bird.r>p.bottom))endGame();});
     }
-    function endGame(){running=false;cancelAnimationFrame(raf);document.getElementById('fMsg').innerHTML=`<strong style="color:#fbbf24;font-size:1.2rem;">${score} pipes</strong><br>${score>=20?'Legendary!':score>=10?'Amazing!':score>=5?'Getting there!':'Try again!'}`;document.getElementById('fOver').classList.remove('hidden');}
+    function endGame(){
+      if(!running)return;
+      running=false;cancelAnimationFrame(raf);sndFlappyDie();
+      document.getElementById('fMsg').innerHTML=`<strong style="color:#fbbf24;font-size:1.1rem;">${score} pipes</strong><br>${score>=20?'Legendary!':score>=10?'Amazing!':score>=5?'Getting there!':'Try again!'}`;
+      document.getElementById('fOver').classList.remove('hidden');
+    }
     function draw(){
-      // sky
       const sky=ctx.createLinearGradient(0,0,0,H);
       sky.addColorStop(0,'#020617');sky.addColorStop(1,'#0f172a');
       ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
-      // stars
-      if(frame%2===0){ctx.fillStyle='rgba(255,255,255,0.6)';for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(Math.random()*W,Math.random()*H*0.6,1,0,Math.PI*2);ctx.fill();}}
-      // pipes
       pipes.forEach(p=>{
         const pg=ctx.createLinearGradient(p.x,0,p.x+PW,0);
         pg.addColorStop(0,'#34d399');pg.addColorStop(1,'#059669');
         ctx.fillStyle=pg;
         ctx.beginPath();ctx.roundRect(p.x,0,PW,p.top,4);ctx.fill();
         ctx.beginPath();ctx.roundRect(p.x,p.bottom,PW,H-p.bottom,4);ctx.fill();
-        // pipe caps
         ctx.fillStyle='#10b981';
-        ctx.beginPath();ctx.roundRect(p.x-4,p.top-14,PW+8,14,4);ctx.fill();
-        ctx.beginPath();ctx.roundRect(p.x-4,p.bottom,PW+8,14,4);ctx.fill();
+        ctx.beginPath();ctx.roundRect(p.x-4,p.top-12,PW+8,12,4);ctx.fill();
+        ctx.beginPath();ctx.roundRect(p.x-4,p.bottom,PW+8,12,4);ctx.fill();
       });
-      // bird
       ctx.save();ctx.translate(bird.x,bird.y);ctx.rotate(bird.angle);
-      // glow
       const bg=ctx.createRadialGradient(0,0,0,0,0,bird.r*2);
       bg.addColorStop(0,'rgba(251,191,36,0.5)');bg.addColorStop(1,'transparent');
       ctx.fillStyle=bg;ctx.beginPath();ctx.arc(0,0,bird.r*2,0,Math.PI*2);ctx.fill();
-      // body
       ctx.fillStyle='#fbbf24';ctx.beginPath();ctx.ellipse(0,0,bird.r,bird.r*0.85,0,0,Math.PI*2);ctx.fill();
-      // wing
       ctx.fillStyle='#f59e0b';
       const wFlap=Math.sin(frame*0.3)*0.4;
       ctx.beginPath();ctx.ellipse(-4,2+wFlap*8,10,6,wFlap,0,Math.PI*2);ctx.fill();
-      // eye
       ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(8,-4,5,0,Math.PI*2);ctx.fill();
       ctx.fillStyle='#1e293b';ctx.beginPath();ctx.arc(9.5,-4,2.5,0,Math.PI*2);ctx.fill();
-      // beak
-      ctx.fillStyle='#fb923c';ctx.beginPath();ctx.moveTo(bird.r-2,0);ctx.lineTo(bird.r+10,3);ctx.lineTo(bird.r-2,6);ctx.closePath();ctx.fill();
+      ctx.fillStyle='#fb923c';ctx.beginPath();ctx.moveTo(bird.r-2,0);ctx.lineTo(bird.r+9,3);ctx.lineTo(bird.r-2,6);ctx.closePath();ctx.fill();
       ctx.restore();
-      // score
-      ctx.fillStyle='rgba(15,23,42,0.7)';ctx.beginPath();ctx.roundRect(W/2-35,14,70,36,10);ctx.fill();
-      ctx.fillStyle='#fbbf24';ctx.font='bold 22px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.fillText(score,W/2,33);
+      ctx.fillStyle='rgba(15,23,42,0.7)';ctx.beginPath();ctx.roundRect(W/2-32,12,64,32,8);ctx.fill();
+      ctx.fillStyle='#fbbf24';ctx.font='bold 20px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(score,W/2,29);
     }
-    document.addEventListener('keydown',e=>{if(e.key===' '||e.key==='ArrowUp'){e.preventDefault();flap();}});
+    document.addEventListener('keydown',e=>{
+      if(e.key===' '||e.key==='ArrowUp'){e.preventDefault();if(!running)start();else flap();}
+    });
     const cw=document.getElementById('fcwrap');
     cw.addEventListener('click',()=>{if(!running)start();else flap();});
     cw.addEventListener('touchstart',e=>{e.preventDefault();if(!running)start();else flap();},{passive:false});
     document.getElementById('flapBtn').addEventListener('click',()=>{if(!running)start();else flap();});
-    document.getElementById('fStartBtn').addEventListener('click',start);
-    document.getElementById('fRestart').addEventListener('click',start);
+    document.getElementById('fStartBtn').addEventListener('click',()=>{sndUIClick();start();});
+    document.getElementById('fRestart').addEventListener('click',()=>{sndUIClick();start();});
     reset();draw();
     </script>
     </body></html>
@@ -1684,17 +1868,17 @@ if st.session_state.selected_game == "whack":
     components.html("""
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
-      .gh{font-family:'Inter',sans-serif;}
+      body{margin:0;font-family:'Inter',sans-serif;}
       .gh-tag{font-size:0.76rem;text-transform:uppercase;letter-spacing:0.2em;color:#f472b6;}
-      .gh-title{font-size:1.9rem;font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;}
-      .gh-icon{width:42px;height:42px;background:rgba(244,114,182,0.12);border:1px solid rgba(244,114,182,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;}
-      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(244,114,182,0.08);border:1px solid rgba(244,114,182,0.2);border-radius:999px;padding:0.25rem 0.75rem;font-size:0.75rem;color:#f472b6;margin-right:6px;}
+      .gh-title{font-size:clamp(1.4rem,4vw,1.9rem);font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+      .gh-icon{width:42px;height:42px;background:rgba(244,114,182,0.12);border:1px solid rgba(244,114,182,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(244,114,182,0.08);border:1px solid rgba(244,114,182,0.2);border-radius:999px;padding:0.25rem 0.7rem;font-size:0.72rem;color:#f472b6;margin-right:5px;margin-bottom:4px;}
     </style>
-    <div class="gh">
+    <div>
       <div class="gh-tag">Reflex · Reaction</div>
       <div class="gh-title">
         <div class="gh-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="8" r="5"/>
             <path d="M3 21a9 9 0 0 1 18 0"/>
             <line x1="12" y1="13" x2="12" y2="16"/>
@@ -1702,16 +1886,14 @@ if st.session_state.selected_game == "whack":
         </div>
         Whack-a-Mole
       </div>
-      <p style="color:#9ca3af;font-size:0.92rem;margin:0;">
-        <span class="ctrl-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          Click / Tap the moles fast!
-        </span>
+      <p style="color:#9ca3af;font-size:0.88rem;margin:0;display:flex;flex-wrap:wrap;gap:4px;">
+        <span class="ctrl-chip">🖱️ Click / Tap the moles fast!</span>
+        <span class="ctrl-chip">🔊 Sound On</span>
       </p>
     </div>
-    """, height=120)
+    """, height=115)
 
-    components.html("""
+    components.html(AUDIO_ENGINE_JS + """
     <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
@@ -1719,67 +1901,71 @@ if st.session_state.selected_game == "whack":
       *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
       body{background:transparent;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
            display:flex;flex-direction:column;align-items:center;padding:0 4px;}
-      .gw{width:100%;max-width:540px;}
-      .scoreboard{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
-      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:12px;padding:10px 6px;text-align:center;}
-      .sv{font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
-      .sl{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-top:3px;}
-      .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:4px;}
+      .gw{width:100%;max-width:520px;}
+      .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px;}
+      .scoreboard{display:flex;gap:6px;}
+      .sc{background:rgba(15,23,42,0.97);border:1px solid rgba(148,163,184,0.18);border-radius:10px;padding:8px 12px;text-align:center;}
+      .sv{font-size:clamp(1rem,3.5vw,1.5rem);font-weight:900;background:linear-gradient(135deg,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+      .sl{font-size:0.58rem;text-transform:uppercase;letter-spacing:0.1em;color:#9ca3af;margin-top:2px;}
+      .sound-btn{padding:0.3rem 0.8rem;font-size:0.72rem;font-weight:600;background:rgba(15,23,42,0.8);
+            border:1px solid rgba(244,114,182,0.3);border-radius:999px;color:#f472b6;cursor:pointer;transition:all 0.15s;}
+      .sound-btn.muted{border-color:rgba(148,163,184,0.2);color:#6b7280;}
+      .timer-bar{width:100%;height:7px;background:rgba(148,163,184,0.12);border-radius:999px;margin-bottom:10px;overflow:hidden;}
+      .timer-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#f472b6,#fb923c);transition:width 0.1s linear;}
+      .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+      @media(max-width:380px){.grid{gap:7px;}}
       .hole{position:relative;aspect-ratio:1;border-radius:50%;background:rgba(15,23,42,0.97);
-            border:2px solid rgba(148,163,184,0.15);overflow:hidden;cursor:pointer;
-            box-shadow:inset 0 8px 24px rgba(0,0,0,0.6);}
-      .hole:active{transform:scale(0.97);}
+            border:2px solid rgba(148,163,184,0.12);overflow:hidden;cursor:pointer;
+            box-shadow:inset 0 8px 20px rgba(0,0,0,0.6);transition:border-color 0.1s;}
+      .hole:active{transform:scale(0.96);}
       .mole{position:absolute;bottom:-100%;left:50%;transform:translateX(-50%);
-            width:70%;transition:bottom 0.18s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;align-items:center;}
+            width:72%;transition:bottom 0.17s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;align-items:center;}
       .hole.up .mole{bottom:0%;}
-      .hole.whacked .mole{bottom:10%;}
+      .hole.whacked .mole{bottom:8%;}
       .mole-face{width:100%;aspect-ratio:1;}
-      .hole.whacked{background:rgba(244,114,182,0.15);border-color:rgba(244,114,182,0.5);}
+      .hole.whacked{background:rgba(244,114,182,0.12);border-color:rgba(244,114,182,0.5);}
       .hit-effect{position:absolute;top:20%;left:50%;transform:translate(-50%,-50%);
-                  font-size:1.4rem;font-weight:900;color:#f472b6;opacity:0;
+                  font-size:clamp(1rem,3vw,1.3rem);font-weight:900;color:#f472b6;opacity:0;
                   transition:opacity 0.1s,transform 0.3s;pointer-events:none;white-space:nowrap;}
-      .hit-effect.show{opacity:1;transform:translate(-50%,-120%);}
-      .start-btn{display:block;width:100%;margin-top:14px;padding:1rem;font-size:1.1rem;font-weight:800;
-                 background:linear-gradient(135deg,#f472b6,#fb923c);border:none;border-radius:16px;
-                 color:#000;cursor:pointer;box-shadow:0 8px 24px rgba(244,114,182,0.3);
-                 transition:transform 0.15s;display:flex;align-items:center;justify-content:center;gap:8px;}
+      .hit-effect.show{opacity:1;transform:translate(-50%,-130%);}
+      .start-btn{display:flex;width:100%;margin-top:12px;padding:0.9rem;font-size:1rem;font-weight:800;
+                 background:linear-gradient(135deg,#f472b6,#fb923c);border:none;border-radius:14px;
+                 color:#000;cursor:pointer;box-shadow:0 8px 22px rgba(244,114,182,0.3);
+                 transition:transform 0.15s;align-items:center;justify-content:center;gap:8px;}
       .start-btn:hover{transform:scale(1.02);}
-      .timer-bar{width:100%;height:8px;background:rgba(148,163,184,0.15);border-radius:999px;
-                 margin-bottom:10px;overflow:hidden;}
-      .timer-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#f472b6,#fb923c);
-                  transition:width 0.1s linear;}
       .result-banner{background:rgba(15,23,42,0.97);border:1px solid rgba(244,114,182,0.3);
-                     border-radius:16px;padding:1.5rem;text-align:center;margin-top:12px;display:none;}
+                     border-radius:14px;padding:1.2rem;text-align:center;margin-top:10px;display:none;}
       .result-banner.show{display:block;}
-      .res-title{font-size:1.6rem;font-weight:900;color:#e5e7eb;margin-bottom:0.3rem;}
-      .res-sub{font-size:0.9rem;color:#9ca3af;}
+      .res-title{font-size:1.4rem;font-weight:900;color:#e5e7eb;margin-bottom:0.3rem;}
+      .res-sub{font-size:0.88rem;color:#9ca3af;}
     </style>
     </head><body>
     <div class="gw">
-      <div class="scoreboard">
-        <div class="sc"><div class="sv" id="wScore">0</div><div class="sl">Score</div></div>
-        <div class="sc"><div class="sv" id="wBest" style="-webkit-text-fill-color:#34d399;color:#34d399;">0</div><div class="sl">Best</div></div>
-        <div class="sc"><div class="sv" id="wTime" style="font-size:1.1rem;">30</div><div class="sl">Time</div></div>
+      <div class="top-row">
+        <div class="scoreboard">
+          <div class="sc"><div class="sv" id="wScore">0</div><div class="sl">Score</div></div>
+          <div class="sc"><div class="sv" id="wBest" style="-webkit-text-fill-color:#34d399;color:#34d399;">0</div><div class="sl">Best</div></div>
+          <div class="sc"><div class="sv" id="wTime" style="font-size:1rem;">30</div><div class="sl">Time</div></div>
+        </div>
+        <button class="sound-btn" id="wSoundBtn" onclick="toggleSound()">🔊 Sound</button>
       </div>
       <div class="timer-bar"><div class="timer-fill" id="timerFill" style="width:100%;"></div></div>
       <div class="grid" id="wgrid"></div>
-      <button class="start-btn" id="wStart" style="margin-top:14px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="5 3 19 12 5 21 5 3"/>
-        </svg>
+      <button class="start-btn" id="wStart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         Start Game — 30 seconds!
       </button>
       <div class="result-banner" id="wResult">
-        <div style="width:56px;height:56px;background:rgba(244,114,182,0.12);border:1px solid rgba(244,114,182,0.35);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div style="width:52px;height:52px;background:rgba(244,114,182,0.1);border:1px solid rgba(244,114,182,0.3);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.7rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="8" r="5"/>
             <path d="M3 21a9 9 0 0 1 18 0"/>
           </svg>
         </div>
-        <div class="res-title">Time's Up!</div>
+        <div class="res-title">Time's Up! ⏱️</div>
         <div class="res-sub" id="wResMsg"></div>
-        <button class="start-btn" onclick="startGame()" style="margin-top:1rem;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <button class="start-btn" onclick="startGame()" style="margin-top:0.8rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
             <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/>
           </svg>
@@ -1788,15 +1974,20 @@ if st.session_state.selected_game == "whack":
       </div>
     </div>
     <script>
+    let soundOn=true;
+    function toggleSound(){
+      soundOn=!soundOn;
+      const btn=document.getElementById('wSoundBtn');
+      btn.textContent=soundOn?'🔊 Sound':'🔇 Muted';
+      btn.classList.toggle('muted',!soundOn);
+      window._masterVol=soundOn?0.35:0;
+    }
     const MOLE_SVG=`<svg class="mole-face" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="40" cy="50" rx="28" ry="32" fill="#a78bfa"/>
       <ellipse cx="40" cy="46" rx="22" ry="26" fill="#c4b5fd"/>
-      <circle cx="28" cy="36" r="6" fill="#fff"/>
-      <circle cx="52" cy="36" r="6" fill="#fff"/>
-      <circle cx="30" cy="37" r="3" fill="#1e1b4b"/>
-      <circle cx="54" cy="37" r="3" fill="#1e1b4b"/>
-      <circle cx="31" cy="36" r="1" fill="#fff"/>
-      <circle cx="55" cy="36" r="1" fill="#fff"/>
+      <circle cx="28" cy="36" r="6" fill="#fff"/><circle cx="52" cy="36" r="6" fill="#fff"/>
+      <circle cx="30" cy="37" r="3" fill="#1e1b4b"/><circle cx="54" cy="37" r="3" fill="#1e1b4b"/>
+      <circle cx="31" cy="36" r="1" fill="#fff"/><circle cx="55" cy="36" r="1" fill="#fff"/>
       <ellipse cx="40" cy="52" rx="12" ry="8" fill="#f9a8d4"/>
       <ellipse cx="34" cy="52" rx="4" ry="3" fill="#f472b6"/>
       <ellipse cx="46" cy="52" rx="4" ry="3" fill="#f472b6"/>
@@ -1813,8 +2004,14 @@ if st.session_state.selected_game == "whack":
       <path d="M45 35 L55 45 M55 35 L45 45" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
       <path d="M30 56 Q40 50 50 56" stroke="#f9a8d4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
     </svg>`;
-    const N=9;let holes=Array(N).fill(false),timers=[],score=0,best=0,timeLeft=30,gameTimer=null,moleTimer=null,running=false;
-    function hud(){document.getElementById('wScore').textContent=score;document.getElementById('wBest').textContent=best;document.getElementById('wTime').textContent=timeLeft;document.getElementById('timerFill').style.width=(timeLeft/30*100)+'%';}
+    const N=9;
+    let holes=Array(N).fill(false),timers=[],score=0,best=0,timeLeft=30,gameTimer=null,moleTimer=null,running=false;
+    function hud(){
+      document.getElementById('wScore').textContent=score;
+      document.getElementById('wBest').textContent=best;
+      document.getElementById('wTime').textContent=timeLeft;
+      document.getElementById('timerFill').style.width=(timeLeft/30*100)+'%';
+    }
     function renderGrid(){
       const g=document.getElementById('wgrid');g.innerHTML='';
       for(let i=0;i<N;i++){
@@ -1828,8 +2025,10 @@ if st.session_state.selected_game == "whack":
     }
     function whack(i){
       if(!running||holes[i]!==true)return;
-      clearTimeout(timers[i]);holes[i]='whacked';score+=10;if(score>best)best=score;hud();renderGrid();
-      const hitEl=document.getElementById('hit'+i);if(hitEl){hitEl.classList.add('show');setTimeout(()=>hitEl&&hitEl.classList.remove('show'),300);}
+      clearTimeout(timers[i]);holes[i]='whacked';score+=10;if(score>best)best=score;
+      sndWhackHit();hud();renderGrid();
+      const hitEl=document.getElementById('hit'+i);
+      if(hitEl){hitEl.classList.add('show');setTimeout(()=>hitEl&&hitEl.classList.remove('show'),300);}
       setTimeout(()=>{if(holes[i]==='whacked'){holes[i]=false;renderGrid();}},400);
     }
     function showMole(){
@@ -1837,7 +2036,7 @@ if st.session_state.selected_game == "whack":
       const avail=holes.map((h,i)=>h===false?i:-1).filter(i=>i>=0);
       if(avail.length===0)return;
       const i=avail[Math.floor(Math.random()*avail.length)];
-      holes[i]=true;renderGrid();
+      holes[i]=true;sndMolePop();renderGrid();
       const dur=Math.max(600,1200-score*4);
       timers[i]=setTimeout(()=>{if(holes[i]===true){holes[i]=false;renderGrid();}},dur);
     }
@@ -1850,9 +2049,11 @@ if st.session_state.selected_game == "whack":
       moleTimer=setInterval(showMole,700);
       gameTimer=setInterval(()=>{
         timeLeft--;hud();
+        if(timeLeft<=5&&timeLeft>0){sndTetrisTick();}
         if(timeLeft<=0){
           running=false;clearInterval(gameTimer);clearInterval(moleTimer);
           timers.forEach(t=>clearTimeout(t));holes=Array(N).fill(false);renderGrid();
+          sndWhackEnd();
           const r=score>=150?'Incredible reflexes!':score>=80?'Great job!':score>=40?'Not bad!':'Keep practising!';
           document.getElementById('wResMsg').innerHTML=`<strong style="color:#f472b6;font-size:1.2rem;">${score} pts</strong><br>${r}`;
           document.getElementById('wResult').classList.add('show');
@@ -1864,7 +2065,7 @@ if st.session_state.selected_game == "whack":
     renderGrid();
     </script>
     </body></html>
-    """, height=680)
+    """, height=660)
 
 # ═══════════════════════════════════════════════════════
 #                    PROGRAMMING QUIZ
@@ -1877,7 +2078,7 @@ if st.session_state.selected_game == "quiz":
         st.session_state.quiz_score = 0
         st.session_state.quiz_answers = {}
         st.session_state.quiz_submitted = {}
-        
+
         QUIZ_QUESTIONS = [
             {"question":"Which Python web framework is known for its 'batteries included' philosophy?","options":["Flask","Django","FastAPI","Pyramid"],"answer":"Django","category":"Backend","explanation":"Django follows the 'batteries included' philosophy, providing built-in features like ORM, authentication, admin panel, and more."},
             {"question":"What does CSS stand for?","options":["Computer Style Sheets","Cascading Style Sheets","Creative Style Sheets","Colorful Style Sheets"],"answer":"Cascading Style Sheets","category":"Frontend","explanation":"CSS (Cascading Style Sheets) is used to style and layout web pages."},
@@ -1897,34 +2098,35 @@ if st.session_state.selected_game == "quiz":
 
     NUM_QUESTIONS = len(st.session_state.quiz_questions)
 
+    # Inject audio engine once for quiz
+    components.html(AUDIO_ENGINE_JS, height=0)
+
     components.html("""
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
-      .gh{font-family:'Inter',sans-serif;}
+      body{margin:0;font-family:'Inter',sans-serif;}
       .gh-tag{font-size:0.76rem;text-transform:uppercase;letter-spacing:0.2em;color:#fde047;}
-      .gh-title{font-size:1.9rem;font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;}
-      .gh-icon{width:42px;height:42px;background:rgba(253,224,71,0.12);border:1px solid rgba(253,224,71,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;}
-      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(253,224,71,0.08);border:1px solid rgba(253,224,71,0.2);border-radius:999px;padding:0.25rem 0.75rem;font-size:0.75rem;color:#fde047;margin-right:6px;}
+      .gh-title{font-size:clamp(1.4rem,4vw,1.9rem);font-weight:900;color:#e5e7eb;margin:0.3rem 0 0.4rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+      .gh-icon{width:42px;height:42px;background:rgba(253,224,71,0.12);border:1px solid rgba(253,224,71,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+      .ctrl-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(253,224,71,0.08);border:1px solid rgba(253,224,71,0.2);border-radius:999px;padding:0.25rem 0.7rem;font-size:0.72rem;color:#fde047;margin-right:5px;margin-bottom:4px;}
     </style>
-    <div class="gh">
+    <div>
       <div class="gh-tag">Trivia · Knowledge</div>
       <div class="gh-title">
         <div class="gh-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fde047" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fde047" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
             <path d="M9 18h6"/><path d="M10 22h4"/>
           </svg>
         </div>
         Dev Quiz
       </div>
-      <p style="color:#9ca3af;font-size:0.92rem;margin:0;">
-        <span class="ctrl-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          5 random programming questions
-        </span>
+      <p style="color:#9ca3af;font-size:0.88rem;margin:0;display:flex;flex-wrap:wrap;gap:4px;">
+        <span class="ctrl-chip">🖱️ 5 random programming questions</span>
+        <span class="ctrl-chip">🔊 Sound feedback</span>
       </p>
     </div>
-    """, height=120)
+    """, height=115)
 
     if st.session_state.quiz_finished:
         score = st.session_state.quiz_score
