@@ -9,7 +9,23 @@
 
 > 🚀 A stunning, fully responsive multi-page portfolio built with **Streamlit** featuring dark-themed UI, interactive games, smooth animations, and dynamic content.
 
-## 📑 Table of Contents
+## � About the Project
+
+This is a **modern, interactive developer portfolio** designed to showcase skills, projects, and creativity in a unique way. Unlike traditional static portfolios, this project leverages Streamlit's capabilities to create a dynamic, app-like experience directly in the browser.
+
+### What Makes This Different?
+
+- **🎮 Interactive Games Hub** - Features 6 fully playable browser-based games (Snake, Tetris, Memory Match, Breakout, Flappy Bird, Whack-a-Mole) plus a Programming Quiz, all built with pure HTML5 Canvas and JavaScript embedded in Streamlit components
+- **🌌 Galaxy Explorer** - A Three.js-powered 3D interactive journey from Earth to the edge of the observable universe, featuring 14 cosmic destinations with gyroscope support on mobile devices
+- **📱 Mobile-First Design** - Fully responsive with touch-optimized controls, custom D-pads for games, and adaptive layouts for all screen sizes
+- **🔊 Web Audio API Integration** - Custom-generated sound effects for all games using the Web Audio API (no external audio files needed)
+- **✨ Visual Polish** - Glass morphism effects, animated particle systems, honeycomb backgrounds, and smooth CSS transitions throughout
+
+### Purpose
+
+Built as both a **personal showcase** and a **demonstration of Streamlit's versatility** beyond data applications, this portfolio proves that Python + Streamlit can create engaging, game-like web experiences typically associated with traditional web frameworks.
+
+## �📑 Table of Contents
 
 - [🎨 Design](#-design)
 - [✨ Features](#-features)
